@@ -3,6 +3,7 @@ h1 {
     color: crimson;
     font-size: 300%;
     height: 71px;
+    margin: 8px 0;
 }
 
 div.box {
@@ -45,4 +46,11 @@ div.box.locked {
 
 .currentRow>.empty~.empty {
     background-color: white;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
 }

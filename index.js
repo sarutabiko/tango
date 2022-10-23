@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //express route handling
 
-app.listen('3333', () => {
+app.listen(3333, '0.0.0.0', () => {
     console.log("App is listening on 3333 port.");
 })
 
