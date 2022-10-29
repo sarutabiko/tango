@@ -1,3 +1,7 @@
+body {
+    margin: 0;
+}
+
 h1 {
     text-align: center;
     color: crimson;
@@ -31,7 +35,7 @@ div.container {
     align-items: center;
 }
 
-div.main div.box.filled {
+div.grid div.box.filled {
     background-color: peru;
 }
 
@@ -53,4 +57,50 @@ body {
     flex-direction: column;
     justify-content: start;
     align-items: center;
+}
+
+#main {
+    display: flex;
+    justify-content: center;
+}
+
+div#main>div {
+    width: 400px;
+    max-height: 400px;
+    margin: 0 10px;
+}
+
+#wordlist {
+    border: double;
+    /* background-color: rgb(252, 244, 245); */
+    text-align: center;
+    font-size: 150%;
+    overflow-y: scroll;
+}
+
+#wordlist>ul {
+    margin: 4px 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+#wordlist>ul>li:nth-of-type(2n) {
+    background-color: papayawhip;
+}
+
+#wordlist>ul>li:nth-of-type(2n+1) {
+    background-color: rgb(246, 239, 178);
+}
+
+#wordlist>ul>hr {
+    margin: 0 0;
+    border: none;
+    border-top: 3px dotted crimson;
+    overflow: visible;
+}
+
+a,
+a:visited {
+    color: inherit;
+    text-decoration: none;
 }

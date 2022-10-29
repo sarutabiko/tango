@@ -37,6 +37,10 @@ app.get('/', (req, res) => {
     res.render('index', { title: "単語 | tango | たんご" });
 })
 
+app.get('/add', (req, res) => {
+    res.render('add', { title: "単語 | tango | たんご" });
+})
+
 app.use((err, req, res, next) => {
     console.log("Something went wrong!");
     console.log(err);

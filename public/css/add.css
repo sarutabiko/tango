@@ -1,0 +1,18 @@
+#apidata {
+    width: 400px;
+    height: 400px;
+    margin: 0 10px;
+    border: double;
+    font-size: 150%;
+    overflow-y: scroll;
+}
+
+#input {
+    margin-bottom: 5px;
+}
+
+#input>.input {
+    border: red solid;
+    padding: 0 0;
+    height: 2rem;
+}

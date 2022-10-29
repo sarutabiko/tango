@@ -1,6 +1,6 @@
 function generateRows(word = 5) {
 
-    const main = document.querySelector("#main");
+    const main = document.querySelector("#grid");
 
     for (let i = 0; i < 6; i++) {
         const row = document.createElement('div');
