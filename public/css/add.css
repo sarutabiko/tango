@@ -1,21 +1,55 @@
-#definitions {
-    border: solid salmon;
-    max-height: 400px;
-    overflow-y: scroll;
-    width: 400px;
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
 }
 
-.apidata {
-    /* text-align: center; */
-    font-size: 150%;
+#main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-self: stretch;
 }
 
 #input {
-    margin-bottom: 5px;
+    border: solid red;
+    width: 60%;
+}
+
+#definitions {
+    border: solid salmon;
+    max-height: 400px;
+    width: 60%;
+    overflow-y: scroll;
 }
 
 #input>.input {
     border: red solid;
     padding: 0 0;
-    height: 2rem;
+    height: 4rem;
+}
+
+.Unit {
+    display: flex;
+    align-items: center;
+}
+
+.Unit .wordunit {
+    flex-grow: 8;
+    overflow: scroll;
+    font-size: 150%;
+}
+
+
+.Unit .plus {
+    box-sizing: border-box;
+    padding: 0 1rem;
+
+    border: red solid;
+    font-size: 300%;
+    margin: 1rem;
+    flex-grow: 2;
 }

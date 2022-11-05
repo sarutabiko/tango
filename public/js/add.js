@@ -11,13 +11,22 @@ button.addEventListener('click', () => {
     //     .then((response) => console.log(response.json()))
     //     .then((data) => console.log(data));
 
-    const pre = document.getElementById("definitions");
+    const def = document.getElementById("definitions");
     for (let i of data.data) {
-        const newdef = document.createElement('pre');
-        newdef.classList.add("apidata");
-        newdef.innerText = i.slug + "\n" + JSON.stringify(i.japanese) + "\n";
-        i.senses.forEach(x => (newdef.innerHTML += " " + x.english_definitions));
-        pre.appendChild(newdef);
-        pre.appendChild(document.createElement('hr'));
+        const newUnit = document.createElement('div');
+        newUnit.classList.add("Unit");
+        const newDef = document.createElement('div');
+        newDef.classList.add("wordunit");
+        def.appendChild(newUnit);
+        newUnit.appendChild(newDef);
+        const pre = document.createElement('pre');
+        newDef.appendChild(pre);
+        const plus = document.createElement('div');
+        newUnit.appendChild(plus);
+        plus.innerText = '+';
+        plus.classList.add("plus");
+        pre.innerText = i.slug + "\n" + JSON.stringify(i.japanese) + "\n";
+        i.senses.forEach(x => (pre.innerHTML += " " + x.english_definitions));
+        def.appendChild(document.createElement('hr'));
     }
 })

@@ -1,12 +1,20 @@
 <% layout('layouts/boilerplate') %>
-    <h1><a href="/"> 単語 </a></h1>
-    <div id="main">
-        <div id="definitions">
-        </div>
-        <div id="input">
-            <input type="text" placeholder="Enter word" id="queryString">
-            <button id="submitBtn">GO!</button>
-        </div>
-    </div>
 
-    <script src="/js/add.js"></script>
+    <link rel="stylesheet" href="/css/add.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    </head>
+
+    <body>
+        <%- partial('partials/navbar') %>
+
+            <div id="main">
+                <div id="input">
+                    <input type="text" placeholder="Enter word" id="queryString">
+                    <button id="submitBtn">GO!</button>
+                </div>
+                <div id="definitions">
+                </div>
+
+            </div>
+
+            <script src="/js/add.js"></script>

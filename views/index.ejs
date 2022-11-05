@@ -1,47 +1,47 @@
 <% layout('layouts/boilerplate') %>
-    <div id="header">
-        <h1 id="title">単語 </h1>
-        <a href="/add">
-            <h1 id="plus">+</h1>
-        </a>
-    </div>
-    <div id="main">
-        <div id="wordlist">
-            <ul>
-                <li>たんご</li>
-                <hr>
-                <li>ちんかす</li>
-                <hr>
-                <li> こども</li>
-                <hr>
-                <li>たんご</li>
-                <hr>
-                <li>ちんかす</li>
-                <hr>
-                <li> こども</li>
-                <hr>
-                <li>たんご</li>
-                <hr>
-                <li>ちんかす</li>
-                <hr>
-                <li> こども</li>
-                <hr>
-                <li>たんご</li>
-                <hr>
-                <li>ちんかす</li>
-                <hr>
-                <li> こども</li>
-                <hr>
-            </ul>
-        </div>
-        <div id="grid">
-        </div>
-    </div>
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/app.css">
+    </head>
 
-    <input class="input" style="display: none;" />
-    <div class="simple-keyboard"></div>
+    <body>
+        <%- partial('partials/navbar') %>
+            <div id="main">
+                <div id="wordlist">
+                    <ul>
+                        <li>たんご</li>
+                        <hr>
+                        <li>ちんかす</li>
+                        <hr>
+                        <li> こども</li>
+                        <hr>
+                        <li>たんご</li>
+                        <hr>
+                        <li>ちんかす</li>
+                        <hr>
+                        <li> こども</li>
+                        <hr>
+                        <li>たんご</li>
+                        <hr>
+                        <li>ちんかす</li>
+                        <hr>
+                        <li> こども</li>
+                        <hr>
+                        <li>たんご</li>
+                        <hr>
+                        <li>ちんかす</li>
+                        <hr>
+                        <li> こども</li>
+                        <hr>
+                    </ul>
+                </div>
+                <div id="grid">
+                </div>
+            </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-keyboard-layouts@latest/build/index.min.js"></script>
-    <script src="/js/simple-keyboard.js"></script>
-    <script src="/js/script.js"> </script>
+            <input class="input" style="display: none;" />
+            <div class="simple-keyboard"></div>
+
+            <script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/simple-keyboard-layouts@latest/build/index.min.js"></script>
+            <script src="/js/simple-keyboard.js"></script>
+            <script src="/js/script.js"> </script>
