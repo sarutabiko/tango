@@ -1,10 +1,13 @@
-#apidata {
-    width: 400px;
-    height: 400px;
-    margin: 0 10px;
-    border: double;
-    font-size: 150%;
+#definitions {
+    border: solid salmon;
+    max-height: 400px;
     overflow-y: scroll;
+    width: 400px;
+}
+
+.apidata {
+    /* text-align: center; */
+    font-size: 150%;
 }
 
 #input {

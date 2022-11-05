@@ -25,7 +25,7 @@ const changeH1 = (i, list) => () => {
 };
 
 
-setInterval(changeH1(0, ["単語", "tango", "たんご", "タンゴ"]), 5000);
+setInterval(changeH1(0, ["単語", "tango", "たんご", "タンゴ"]), 7000);
 generateRows();
 
 

@@ -34,7 +34,7 @@ app.listen(3333, '0.0.0.0', () => {
 
 
 app.get('/', (req, res) => {
-    res.render('index', { title: "単語 | tango | たんご" });
+    res.render('index', { title: ": one, simple" });
 })
 
 app.get('/add', (req, res) => {

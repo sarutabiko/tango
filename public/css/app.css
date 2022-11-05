@@ -1,14 +1,42 @@
 body {
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
 }
 
-h1 {
-    text-align: center;
+#header {
+    align-self: stretch;
+    display: flex;
+    position: relative;
+    justify-content: flex-end;
+    border-bottom: red double;
+    margin-bottom: 4px;
+}
+
+#header h1 {
+    display: inline-block;
     color: crimson;
     font-size: 300%;
     height: 71px;
     margin: 8px 0;
 }
+
+#header h1#title {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+#header h1#plus {
+    box-sizing: border-box;
+    border: red double;
+    margin-right: 1rem;
+    padding: 0 1rem;
+
+}
+
 
 div.box {
     height: 60px;
@@ -52,12 +80,6 @@ div.box.locked {
     background-color: white;
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-}
 
 #main {
     display: flex;
