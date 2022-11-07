@@ -15,8 +15,28 @@ body {
 }
 
 #input {
+    display: flex;
     border: solid red;
+    margin: 4px;
     width: 60%;
+    align-items: center;
+    justify-content: center;
+}
+
+#input input {
+    padding: 0 4px;
+    width: 85%;
+    height: fit-content;
+}
+
+#input #go {
+    margin: 2px;
+    margin-left: auto;
+    padding: 2px;
+    font-size: 150%;
+    border: solid red;
+    color: red;
+    background-color: white;
 }
 
 #definitions {
@@ -26,15 +46,18 @@ body {
     overflow-y: scroll;
 }
 
-#input>.input {
-    border: red solid;
-    padding: 0 0;
-    height: 4rem;
+#definitions hr {
+    margin: 0;
 }
 
 .Unit {
     display: flex;
     align-items: center;
+    background-color: papayawhip;
+}
+
+.Unit:nth-of-type(even) {
+    background-color: rgb(246, 239, 178);
 }
 
 .Unit .wordunit {
@@ -43,13 +66,28 @@ body {
     font-size: 150%;
 }
 
-
 .Unit .plus {
     box-sizing: border-box;
     padding: 0 1rem;
-
     border: red solid;
     font-size: 300%;
-    margin: 1rem;
-    flex-grow: 2;
+    margin: 4px;
+    flex-grow: 0;
+    background-color: white;
+}
+
+#input #go:hover,
+.Unit .plus:hover {
+    background-color: cornsilk;
+}
+
+@media (width<=600px) {
+    #input {
+        width: 90%;
+    }
+
+    #definitions {
+        width: 90%;
+    }
+
 }

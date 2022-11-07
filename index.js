@@ -12,19 +12,20 @@ app.use(methodOverride('_method'));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, 'public')));
 
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
+const { Word } = require('./models/wordSchema');
 
 // mongo connection
-// main()
-//     .then(() => {
-//         console.log("Connection Open!!!");
-//     })
-//     .catch(
-//         err => { console.log("Ooops error!!!"); console.log(err); });
+main()
+    .then(() => {
+        console.log("Connection Open!!!");
+    })
+    .catch(
+        err => { console.log("Ooops error!!!"); console.log(err); });
 
-// async function main() {
-//     await mongoose.connect('mongodb://127.0.0.1:27017/parallist');
-// }
+async function main() {
+    await mongoose.connect('mongodb://127.0.0.1:27017/tango');
+}
 
 //express route handling
 
