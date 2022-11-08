@@ -6,16 +6,17 @@
 
     <body>
         <%- partial('partials/navbar') %>
-
             <div id="main">
-                <div id="input">
-                    <input type="text" placeholder="Enter word" id="queryString">
-                    <button id="go">GO
-                    </button>
-                </div>
-                <div id="definitions">
-                </div>
+                <form action="/all" method="POST">
+                    <div id="words">
+                        Word:
+                    </div>
 
+                    <div id="englishDefs">
+                        English:
+                    </div>
+                    <button>Enter</button>
+                </form>
             </div>
 
             <script src="/js/add.js"></script>

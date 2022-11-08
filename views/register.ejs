@@ -1,0 +1,23 @@
+<% layout('layouts/boilerplate') %>
+    <link rel="stylesheet" href="/css/navbar.css">
+
+    </head>
+
+    <body>
+        <%- partial('partials/navbar') %>
+
+            <form action="/authenticate" method="POST">
+                <table>
+                    <tr>
+                        <td align="right">Username:</td>
+                        <td align="left"><input type="text" name="username" required /></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Password:</td>
+                        <td align="left"><input type="password" name="password" required /></td>
+                    </tr>
+                    <tr>
+                        <td align="left"> <button>Register</button> </td>
+                    </tr>
+                </table>
+            </form>

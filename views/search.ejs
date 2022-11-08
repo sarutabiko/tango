@@ -1,0 +1,18 @@
+<% layout('layouts/boilerplate') %>
+
+    <link rel="stylesheet" href="/css/search.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    </head>
+
+    <body>
+        <%- partial('partials/navbar') %>
+
+            <div id="main">
+                <div id="search">
+                    <input type="text" placeholder="Enter word" id="queryString">
+                    <button id="go">GO
+                    </button>
+                </div>
+            </div>
+
+            <script src="/js/search.js"></script>

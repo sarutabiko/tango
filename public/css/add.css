@@ -1,93 +1,10 @@
-body {
-    margin: 0;
+#main form {
     display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-}
-
-#main {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    align-self: stretch;
-}
-
-#input {
-    display: flex;
-    border: solid red;
-    margin: 4px;
-    width: 60%;
-    align-items: center;
     justify-content: center;
 }
 
-#input input {
-    padding: 0 4px;
-    width: 85%;
-    height: fit-content;
+#main #words .reading {
+    color: gray;
 }
 
-#input #go {
-    margin: 2px;
-    margin-left: auto;
-    padding: 2px;
-    font-size: 150%;
-    border: solid red;
-    color: red;
-    background-color: white;
-}
-
-#definitions {
-    border: solid salmon;
-    max-height: 400px;
-    width: 60%;
-    overflow-y: scroll;
-}
-
-#definitions hr {
-    margin: 0;
-}
-
-.Unit {
-    display: flex;
-    align-items: center;
-    background-color: papayawhip;
-}
-
-.Unit:nth-of-type(even) {
-    background-color: rgb(246, 239, 178);
-}
-
-.Unit .wordunit {
-    flex-grow: 8;
-    overflow: scroll;
-    font-size: 150%;
-}
-
-.Unit .plus {
-    box-sizing: border-box;
-    padding: 0 1rem;
-    border: red solid;
-    font-size: 300%;
-    margin: 4px;
-    flex-grow: 0;
-    background-color: white;
-}
-
-#input #go:hover,
-.Unit .plus:hover {
-    background-color: cornsilk;
-}
-
-@media (width<=600px) {
-    #input {
-        width: 90%;
-    }
-
-    #definitions {
-        width: 90%;
-    }
-
-}
+/* #main #englishDefs {} */

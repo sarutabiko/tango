@@ -1,8 +1,8 @@
-function generateRows(word = 5) {
+function generateRows(word = 5, row = 1) {
 
     const main = document.querySelector("#grid");
 
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < row; i++) {
         const row = document.createElement('div');
         row.classList.add("row")
         if (!(i))
@@ -17,6 +17,6 @@ function generateRows(word = 5) {
     }
 }
 
-generateRows();
+generateRows(undefined, 3);
 
 

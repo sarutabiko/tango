@@ -38,8 +38,20 @@ app.get('/', (req, res) => {
     res.render('index', { title: ": one, simple" });
 })
 
+app.get('/search', (req, res) => {
+    res.render('search', { title: "単語 | tango | たんご" });
+})
+
 app.get('/add', (req, res) => {
-    res.render('add', { title: "単語 | tango | たんご" });
+    res.render('add', { title: 'Add word' });
+})
+
+app.get('/register', (req, res) => {
+    res.render('register', { title: 'Register' });
+})
+
+app.post('/authenticate', (req, res) => {
+    res.send(req.body);
 })
 
 app.use((err, req, res, next) => {
