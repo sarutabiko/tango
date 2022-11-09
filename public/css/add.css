@@ -7,4 +7,9 @@
     color: gray;
 }
 
-/* #main #englishDefs {} */
+#main #words,
+#main #englishDefs {
+    text-align: center;
+    border: solid red;
+    margin: 4px;
+}

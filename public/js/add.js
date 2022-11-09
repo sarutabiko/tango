@@ -14,7 +14,7 @@ for (let i of word.wordList) {
     checkbox.setAttribute('type', 'checkbox');
     checkbox.setAttribute('checked', true);
 
-    wordChecks.appendChild(document.createElement('br'));
+    wordChecks.appendChild(document.createElement('hr'));
     wordChecks.appendChild(checkbox);
     wordChecks.appendChild(label);
 
@@ -33,7 +33,7 @@ for (let i of word.english) {
     checkbox.setAttribute('type', 'checkbox');
     checkbox.setAttribute('checked', true);
 
-    englishDefs.appendChild(document.createElement('br'));
+    englishDefs.appendChild(document.createElement('hr'));
     englishDefs.appendChild(checkbox);
     englishDefs.appendChild(label);
 }
