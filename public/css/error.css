@@ -1,0 +1,7 @@
+#errBox {
+    text-align: center;
+    border: solid 5px red;
+    padding: 8px;
+    margin: 8px;
+    width: 60%;
+}

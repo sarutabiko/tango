@@ -1,0 +1,17 @@
+#success {
+    background-color: rgb(169, 231, 169);
+}
+
+#error {
+    background-color: rgb(251, 196, 196);
+}
+
+#success,
+#error {
+    padding: 2px;
+    margin: 4px;
+}
+
+button.hide {
+    background-color: white;
+}
