@@ -1,0 +1,17 @@
+<% layout('layouts/boilerplate') %>
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/error.css">
+    </head>
+
+    <body>
+        <%- partial('partials/navbar') %>
+
+            <div id="errBox" role="alert">
+                <h4>
+                    <%=err.statusCode%>
+                        <%=err.message%>
+                </h4>
+                <pre>
+                    <%= err.stack %>
+                </pre>
+            </div>
