@@ -41,7 +41,8 @@ body {
     transform: translate(-50%, 0);
 }
 
-#header a h1#plus {
+#header a h1#plus,
+#header a h1#profile {
     box-sizing: border-box;
     border: red double;
     /* margin-right: 4px; */
@@ -52,6 +53,7 @@ body {
     color: rgb(145, 5, 28);
 }
 
+#header a h1#profile:hover,
 #header a h1#plus:hover {
     background-color: cornsilk;
 }
