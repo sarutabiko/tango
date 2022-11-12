@@ -15,7 +15,7 @@ const userRoutes = require('./routes/users');
 const flash = require('connect-flash');
 
 const ExpressError = require('./utils/ExpressError');
-
+const { isLoggedIn } = require('./middleware');
 // mongo connection
 main()
     .then(() => {
@@ -47,7 +47,8 @@ const sessionConfig = {
     cookie: {
         httpOnly: true,
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-        maxAge: 1000 * 60 * 60 * 24 * 7
+        maxAge: 1000 * 60 * 60 * 24 * 7,
+        sameSite: 'strict'
     }
 }
 app.use(session(sessionConfig));
@@ -61,8 +62,11 @@ app.use(flash());
 
 app.use((req, res, next) => {
     console.log(req.session);
+    res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
+    res.locals.alert = req.flash('alert');
+    res.locals.message = '';
     next();
 })
 app.listen(3333, '0.0.0.0', () => {
@@ -72,15 +76,19 @@ app.listen(3333, '0.0.0.0', () => {
 app.use('/', userRoutes);
 
 app.get('/', (req, res) => {
-    res.render('index', { title: ": one, simple" });
+    res.render('index', { title: "単語" });
 })
 
 app.get('/search', (req, res) => {
     res.render('search', { title: "Search" });
 })
 
-app.get('/add', (req, res) => {
+app.get('/add', isLoggedIn, (req, res) => {
     res.render('add', { title: 'Add word' });
+})
+
+app.post('/', isLoggedIn, (req, res) => {
+    res.render('index', { title: '' })
 })
 
 app.all('*', (req, res, next) => {

@@ -39,7 +39,7 @@ button.addEventListener('click', () => {
         newDef.classList.add("wordunit");
         def.appendChild(newUnit);
         newUnit.appendChild(newDef);
-        const pre = document.createElement('pre');
+        const pre = document.createElement('div');
         newDef.appendChild(pre);
         const plus = document.createElement('div');
         newUnit.appendChild(plus);
@@ -53,7 +53,7 @@ button.addEventListener('click', () => {
 
         i.wordList.forEach(x => {
             if (pre.innerText)
-                pre.innerHTML += ", "
+                pre.innerText += ", "
             pre.innerText += x.kanji;
             pre.innerText += ` (${x.reading})`;
         });
@@ -75,7 +75,7 @@ button.addEventListener('click', () => {
         x.addEventListener('click', function () {
             console.log(mydata[parseInt(this.dataset.i)]);
             localStorage.setItem('word', JSON.stringify(mydata[parseInt(this.dataset.i)]));
-            window.location.replace("/add");
+            return window.location.replace("/add");
         });
     });
 
