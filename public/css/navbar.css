@@ -1,5 +1,6 @@
 html,
 body {
+    font-family: 'Noto Serif JP', san-serif;
     box-sizing: border-box;
     height: 100vh;
     margin: 0;
@@ -17,7 +18,6 @@ body {
     background-color: white;
 }
 
-
 #header {
     align-self: stretch;
     display: flex;
@@ -25,28 +25,32 @@ body {
     justify-content: flex-end;
     border-bottom: red double;
     margin-bottom: 4px;
+    font-weight: 400;
 }
 
 #header a h1 {
     display: inline-block;
     color: crimson;
     font-size: 300%;
-    height: 71px;
+    height: 61px;
     margin: 0;
 }
 
 #header a h1#title {
     position: absolute;
+    top: -4px;
     left: 50%;
     transform: translate(-50%, 0);
+    padding-bottom: 2px;
 }
 
-#header a h1#plus,
+#header a h1#search,
 #header a h1#profile {
     box-sizing: border-box;
     border: red double;
-    /* margin-right: 4px; */
-    padding: 0 1rem;
+    margin: 2px;
+    padding: 0.8rem 1rem 1.2rem 1rem;
+    font-size: 150%;
 }
 
 #header a h1#title:hover {
@@ -54,7 +58,7 @@ body {
 }
 
 #header a h1#profile:hover,
-#header a h1#plus:hover {
+#header a h1#search:hover {
     background-color: cornsilk;
 }
 
@@ -62,4 +66,28 @@ a,
 a:visited {
     color: inherit;
     text-decoration: none;
+}
+
+.menu-content {
+    text-align: center;
+    display: none;
+    position: absolute;
+    right: 2px;
+    min-width: 60px;
+    padding: 2px;
+    border: double red;
+    z-index: 1;
+}
+
+.menu-content hr {
+    margin: 2px;
+}
+
+
+.links-hidden:hover {
+    background-color: cornsilk;
+}
+
+.dropdown-menu:hover .menu-content {
+    display: block;
 }
