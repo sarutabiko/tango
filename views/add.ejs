@@ -2,21 +2,27 @@
 
     <link rel="stylesheet" href="/css/add.css">
     <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/flash.css">
     </head>
 
     <body>
         <%- partial('partials/navbar') %>
-            <div id="main">
-                <form action="/all" method="POST">
-                    <div id="words">
-                        Word:
-                    </div>
+            <%- partial('partials/flash') %>
+                <div id="main">
+                    <form action="/all" method="POST">
+                        <div id="words">
+                            Word:
+                        </div>
 
-                    <div id="englishDefs">
-                        English:
-                    </div>
-                    <button>Enter</button>
-                </form>
-            </div>
+                        <div id="englishDefs">
+                            English:
+                        </div>
+                        <button>Enter</button>
+                    </form>
+                </div>
 
-            <script src="/js/add.js"></script>
+                <% if (!currentUser) { %>
+                    <%- partial('partials/login') %>
+                        <% } %>
+
+                            <script src="/js/add.js"></script>
