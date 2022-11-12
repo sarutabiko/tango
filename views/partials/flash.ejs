@@ -1,5 +1,5 @@
 <% if(success && success.length) {%>
-    <div id="success">
+    <div class="success">
         <%= success %>
             <button class="hide">
                 <span>&times;</span>
@@ -8,7 +8,7 @@
     <% } %>
 
         <% if(error && error.length) {%>
-            <div id="error" role="alert">
+            <div class="error" role="alert">
                 <b> ERROR:</b>
                 <%= error %>
                     <button class="hide">
@@ -16,3 +16,13 @@
                     </button>
             </div>
             <% } %>
+
+                <% if(alert && alert.length) {%>
+                    <div class="alert" role="alert">
+                        <b> Alert:</b>
+                        <%= alert %>
+                            <button class="hide">
+                                <span>&times;</span>
+                            </button>
+                    </div>
+                    <% } %>
