@@ -1,0 +1,17 @@
+<div id="credentials">
+    <%- partial('partials/flash') %>
+
+        <form action="/register" method="POST">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required />
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required />
+
+            <br>
+            <button>Register</button>
+        </form>
+        <div id="prompt"><a href="/login">Or Login here</a></div>
+
+</div>

@@ -1,0 +1,67 @@
+#credentials {
+    background-color: white;
+    display: block;
+    z-index: 9;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+
+    font-size: large;
+    align-items: center;
+    border: 4px double red;
+    padding: 1rem 2rem 1rem 2rem;
+}
+
+#credentials div {
+    text-align: center;
+}
+
+#credentials form label {
+    display: block;
+    text-align: left;
+}
+
+#credentials form input {
+    margin-bottom: 1rem;
+    margin-top: 0.25rem;
+    font-size: medium;
+    padding: 4px 2px;
+}
+
+#credentials form button {
+    display: block;
+    margin: 4px auto;
+    background-color: white;
+    color: red;
+    transition: all 0.2s;
+    font-size: large;
+    font-weight: bold;
+    border: 0.1em solid red;
+    width: fit-content;
+    padding: 0.35em 1.2em;
+}
+
+#credentials form button:hover {
+    background-color: #f5eeee;
+    color: maroon;
+}
+
+#prompt {
+    margin: 2rem;
+    font-weight: bold;
+    color: red;
+    text-decoration: underline red;
+}
+
+#prompt a:hover {
+    color: maroon;
+}
