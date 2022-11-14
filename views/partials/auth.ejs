@@ -1,0 +1,16 @@
+<div id="credentials">
+
+    <%- partial('partials/flash') %>
+        <div id="authMessage" style="display: none"></div>
+        <form id="authForm" action="/auth" method="POST">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required />
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required />
+            <br>
+            <button>Log in</button>
+        </form>
+        <div id="prompt"><a>New User? Register here</a></div>
+</div>
+
+<script src="/js/auth.js"></script>

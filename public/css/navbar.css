@@ -83,6 +83,9 @@ a:visited {
     margin: 2px;
 }
 
+.links-hidden {
+    background-color: white;
+}
 
 .links-hidden:hover {
     background-color: cornsilk;

@@ -5,14 +5,15 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 
 const mongoose = require('mongoose');
-const { Word } = require('./models/wordSchema');
+// const { Word } = require('./models/wordSchema');
 
 const session = require("express-session");
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
-const userRoutes = require('./routes/users');
+const authRoutes = require('./routes/auth');
 const flash = require('connect-flash');
+const cookieParser = require('cookie-parser');
 
 const ExpressError = require('./utils/ExpressError');
 const { isLoggedIn } = require('./middleware');
@@ -38,6 +39,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser());
 
 
 const sessionConfig = {
@@ -61,19 +63,20 @@ passport.deserializeUser(User.deserializeUser());
 app.use(flash());
 
 app.use((req, res, next) => {
-    console.log(req.session);
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     res.locals.alert = req.flash('alert');
     res.locals.message = '';
+    // console.log("req.session is: ", req.session);
+    console.log("res.locals is: ", res.locals);
     next();
 })
 app.listen(3333, '0.0.0.0', () => {
     console.log("App is listening on 3333 port.");
 })
 
-app.use('/', userRoutes);
+app.use('/', authRoutes);
 
 app.get('/', (req, res) => {
     res.render('index', { title: "単語" });

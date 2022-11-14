@@ -7,22 +7,24 @@
 
     <body>
         <%- partial('partials/navbar') %>
-            <%- partial('partials/flash') %>
-                <div id="main">
-                    <form action="/all" method="POST">
-                        <div id="words">
-                            Word:
+            <% if (currentUser) {%>
+                <%- partial('partials/flash') %>
+                    <% } %>
+                        <div id="main">
+                            <form action="/all" method="POST">
+                                <div id="words">
+                                    Word:
+                                </div>
+
+                                <div id="englishDefs">
+                                    English:
+                                </div>
+                                <button>Enter</button>
+                            </form>
                         </div>
 
-                        <div id="englishDefs">
-                            English:
-                        </div>
-                        <button>Enter</button>
-                    </form>
-                </div>
+                        <% if (!currentUser) { %>
+                            <%- partial('partials/auth') %>
+                                <% }%>
 
-                <% if (!currentUser) { %>
-                    <%- partial('partials/login') %>
-                        <% } %>
-
-                            <script src="/js/add.js"></script>
+                                    <script src="/js/add.js"></script>

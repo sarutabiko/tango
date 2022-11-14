@@ -1,4 +1,6 @@
 #credentials {
+    box-shadow: 0px 0px 1px 5000px rgba(0, 0, 0, 0.4);
+
     background-color: white;
     display: block;
     z-index: 9;
@@ -30,11 +32,17 @@
     text-align: left;
 }
 
-#credentials form input {
+#credentials form input,
+#credentials #authMessage {
     margin-bottom: 1rem;
     margin-top: 0.25rem;
     font-size: medium;
     padding: 4px 2px;
+}
+
+#credentials #authMessage {
+    background-color: cornsilk;
+    word-wrap: break-word;
 }
 
 #credentials form button {
