@@ -30,9 +30,14 @@ router.post('/register', async (req, res) => {
         const { email, username, password } = req.body;
         const user = new User({ email, username });
         const registeredUser = await User.register(user, password);
-        console.log("registerUser returned: ", registeredUser);
-        res.status(200);
-        res.send('Registered successfully. Welcome to 単語！');
+        req.login(registeredUser, err => {
+            if (err)
+                return next(e);
+            req.flash('success', 'Registered successfully. Welcome to 単語！');
+            console.log("registerUser returned: ", registeredUser);
+            res.status(200);
+            res.send("Registered successfully. Welcome to 単語！");
+        })
     } catch (err) {
         req.flash('error', err.message);
         console.log("Caught error reads: ", err.message)

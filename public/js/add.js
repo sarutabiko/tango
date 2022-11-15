@@ -1,5 +1,9 @@
 let word = JSON.parse(localStorage.getItem('word'));
 
+if (document.querySelector("#credentials #authMessage")) {
+    document.querySelector("#credentials #authMessage").innerText = "You need to log-in to save words";
+    document.querySelector("#credentials #authMessage").setAttribute('style', 'display:block');
+}
 console.log(word);
 
 for (let i of word.wordList) {
@@ -38,7 +42,5 @@ for (let i of word.english) {
     englishDefs.appendChild(label);
 }
 
-document.getElementById("credentials").prepend(document.createElement('div'));
-document.querySelector("#credentials #authMessage").innerText = "You need to log-in to save words";
-document.querySelector("#credentials #authMessage").setAttribute('style', 'display:block');
+
 // localStorage.removeItem('word');

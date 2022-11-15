@@ -74,22 +74,8 @@ loginForm.addEventListener('submit', async function (event) {
         const response = await fetch(url, fetchOptions);
         console.log(response);
 
-        if (response.status != 200) {
-            // document.getElementById("credentials").prepend(document.createElement('div'));
-            // document.querySelector("#credentials #authMessage").innerText = await response.text();
-            // document.querySelector("#credentials #authMessage").setAttribute('style', 'display:block');
-            window.location.reload();
-        }
+        window.location.reload();
     }
-
-    // if (response.ok) {
-    //     if (0) {
-    //         window.location.replace("/");
-    //     }
-    //     else {
-    //         window.location.reload();
-    //     }
-    // }
     catch (error) {
         console.log(error);
         window.location.reload();
