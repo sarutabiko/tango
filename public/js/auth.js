@@ -1,6 +1,5 @@
 const loginForm = document.querySelector("#authForm");
 
-
 const switchAuth = document.querySelector("#prompt a");
 const switchFunc = function () {
     let formNode = document.querySelector("#credentials form button");
@@ -35,9 +34,9 @@ const switchFunc = function () {
         formNode.innerText = "Log in";
         formNode.parentElement.setAttribute('action', '/auth')
 
-        formNode = document.querySelector("label");
+        formNode = document.querySelector("#credentials form label");
         formNode.parentNode.removeChild(formNode);
-        formNode = document.querySelector("input");
+        formNode = document.querySelector("#credentials form input");
         formNode.parentNode.removeChild(formNode);
 
         document.querySelector("#credentials #prompt a").innerText = "New User? Register here";
