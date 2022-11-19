@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { Word } = require('./models/wordSchema');
+const { Word, Wordlist } = require('./models/wordSchema');
 
 // mongo connection
 main()
@@ -38,5 +38,12 @@ const genkiV1 = [{
 }];
 
 Word.insertMany(genkiV1)
-    .then(res => console.log(res))
+    .then(
+        function (res) {
+            const newlist = new Wordlist({ 'name': 'genkiEx' });
+            res.forEach(w => newlist.words.push(w._id));
+            newlist.save();
+        }
+    )
     .catch(e => console.log(e));
+

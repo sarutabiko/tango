@@ -12,7 +12,21 @@ const word = new mongoose.Schema({
     }
 });
 
+const wordlist = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    words: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Word'
+        }
+    ],
+})
+
 const Word = mongoose.model('Word', word);
-module.exports = { Word };
+const Wordlist = mongoose.model('Wordlist', wordlist);
+module.exports = { Word, Wordlist };
 
 
