@@ -1,0 +1,34 @@
+#profileContent {
+    display: flex;
+    justify-content: center;
+}
+
+#profileContent #left {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+#wordbox {
+    margin-top: auto;
+}
+
+#profileBox,
+#wordBox,
+#listBox {
+    margin: 4px;
+    text-align: center;
+    border: double red;
+    padding: 4px;
+}
+
+/* #profileBox h3, */
+#profileBox h3,
+#profileBox h4 {
+    font-weight: 400;
+    margin: 2px 0;
+}
+
+#listBox {
+    width: 50vw;
+}

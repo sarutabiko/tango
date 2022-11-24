@@ -1,0 +1,37 @@
+<% layout('layouts/boilerplate') %>
+
+    <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    </head>
+
+    <body>
+        <%- partial('partials/navbar') %>
+
+            <div id="profileContent">
+                <div id="left">
+                    <div id="profileBox">
+                        <h2>
+                            <%=currentUser.username %>
+                        </h2>
+                        <hr>
+                        <h3>
+                            <%=currentUser.email %>
+                        </h3>
+                        <hr>
+                        <h4> X words in Y lists</h4>
+                        <hr>
+                        <a href="/logout">Log Out</a>
+                    </div>
+                    <div id="wordBox">
+                        <h2>ここで一つ単語だ</h2>
+                    </div>
+                </div>
+
+
+                <div id="listBox">
+                    <ul>
+
+                    </ul>
+                </div>
+
+            </div>

@@ -5,7 +5,10 @@ const User = require("../models/user");
 
 router.route('/auth')
     .get((req, res) => {
-        res.render('auth/fullAuthPage', { title: "Log in" });
+        if (res.locals.currentUser)
+            res.render('auth/profile', { title: "Profile" })
+        else
+            res.render('auth/fullAuthPage', { title: "Log in" });
     })
     .post(passport.authenticate('local', { failureFlash: true, failureRedirect: false }), async (req, res) => {
         // req.flash('success', 'Welcome back');
@@ -13,7 +16,7 @@ router.route('/auth')
         // delete req.session.returnTo;
         if (req.user) {
             req.flash('success', "Successfully logged in.");
-            res.send(true);
+            res.redirect('/');
         }
     });
 
