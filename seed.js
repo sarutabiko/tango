@@ -42,6 +42,7 @@ Word.insertMany(genkiV1)
         function (res) {
             const newlist = new Wordlist({ 'name': 'genkiEx' });
             res.forEach(w => newlist.words.push(w._id));
+            newlist.public = true;
             newlist.save();
         }
     )
