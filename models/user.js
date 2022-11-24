@@ -6,7 +6,13 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true
-    }
+    },
+    lists: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Wordlist'
+        }
+    ]
 });
 
 UserSchema.plugin(passportLocalMongoose);
