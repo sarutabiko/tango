@@ -96,6 +96,7 @@ app.post('/', isLoggedIn, (req, res) => {
     res.render('index', { title: '' })
 })
 
+
 app.use((err, req, res, next) => {
     console.log("Something went wrong!");
     console.log(err);
