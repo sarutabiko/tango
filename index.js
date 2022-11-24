@@ -12,6 +12,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const authRoutes = require('./routes/auth');
+const wordRoutes = require('./routes/words');
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 
@@ -76,11 +77,12 @@ app.listen(3333, '0.0.0.0', () => {
     console.log("App is listening on 3333 port.");
 })
 
-app.use('/', authRoutes);
-
 app.get('/', (req, res) => {
     res.render('index', { title: "単語" });
 })
+
+app.use('/', authRoutes);
+app.use('/word', wordRoutes);
 
 app.get('/search', (req, res) => {
     res.render('search', { title: "Search" });
@@ -92,10 +94,6 @@ app.get('/add', isLoggedIn, (req, res) => {
 
 app.post('/', isLoggedIn, (req, res) => {
     res.render('index', { title: '' })
-})
-
-app.all('*', (req, res, next) => {
-    next(new ExpressError(404, 'Page Not Found'))
 })
 
 app.use((err, req, res, next) => {
