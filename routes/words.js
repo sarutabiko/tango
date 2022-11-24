@@ -2,6 +2,7 @@ const express = require('express');
 const { isLoggedIn, isAuthorised } = require('../middleware');
 const router = express.Router();
 const { Word, Wordlist } = require("../models/wordSchema");
+const DictWord = require('../models/dictionaryWord');
 
 
 router.get('/:wordid', async (req, res, next) => {
@@ -21,6 +22,14 @@ router.get('/:user/:listID',
     async (req, res, next) => {
         res.send(res.locals.wordlist);
     })
+
+router.post('/search', async (req, res) => {
+    const { query } = req.body;
+    console.log("search query is: ", query);
+    const results = await DictWord.find({ meaning: { $elemMatch: { $elemMatch: { $in: [query] } } } });
+    // console.log(results);
+    res.send(results);
+})
 
 
 module.exports = router;
