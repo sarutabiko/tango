@@ -1,46 +1,68 @@
+// Get item passed form /search
 let word = JSON.parse(localStorage.getItem('word'));
+// console.log(word);
 
+// Check authentication
 if (document.querySelector("#credentials #authMessage")) {
     document.querySelector("#credentials #authMessage").innerText = "You need to log-in to save words";
     document.querySelector("#credentials #authMessage").setAttribute('style', 'display:block');
 }
-console.log(word);
 
-for (let i of word.wordList) {
-    const wordChecks = document.getElementById('words');
-    const label = document.createElement('label');
-    label.setAttribute('for', i.kanji);
-    label.innerHTML = i.kanji + ` <span class='reading'>(${i.reading})</span>`;
+// Form components contructor function
+const divConstructor = function (title, arr) {
+    const main = document.querySelector('#formBody form');
 
-    const checkbox = document.createElement('input');
-    checkbox.setAttribute('name', i.kanji);
-    checkbox.setAttribute('id', i.kanji);
-    checkbox.setAttribute('type', 'checkbox');
-    checkbox.setAttribute('checked', true);
+    const box = document.createElement("div");
+    box.setAttribute('id', title);
+    box.innerHTML = `${title}<hr>`;
 
-    wordChecks.appendChild(document.createElement('hr'));
-    wordChecks.appendChild(checkbox);
-    wordChecks.appendChild(label);
+    console.log("arr is: ", arr)
+    console.log("title is: ", title)
 
-    console.log(i.kanji + ` (${i.reading})`);
+    arr.forEach(i => {
+        const term = document.createElement("div");
+        term.setAttribute('class', 'term');
+
+        i.forEach(str => {
+
+            const label = document.createElement('label');
+            label.setAttribute('for', `${title}.${str}`);
+            label.innerHTML = str;
+
+            const checkbox = document.createElement('input');
+            checkbox.setAttribute('name', `${title}[${str}]`);
+            checkbox.setAttribute('id', `${title}.${str}`);
+            // checkbox.setAttribute('id', i);
+            checkbox.setAttribute('type', 'checkbox');
+            checkbox.setAttribute('checked', true);
+
+            term.appendChild(checkbox);
+            term.appendChild(label);
+        });
+
+
+        main.appendChild(box);
+        box.appendChild(term);
+
+    })
 }
 
-for (let i of word.english) {
-    const englishDefs = document.getElementById('englishDefs');
-    const label = document.createElement('label');
-    label.setAttribute('for', i);
-    label.innerText = i.join(', ');
+// Create form
+const createForm = function () {
+    if (word.kanji.length) {
+        divConstructor("Kanji", word.kanji);
+    }
+    divConstructor("Reading", word.reading);
+    divConstructor("Meaning", word.meaning);
 
-    const checkbox = document.createElement('input');
-    checkbox.setAttribute('name', i);
-    checkbox.setAttribute('id', i);
-    checkbox.setAttribute('type', 'checkbox');
-    checkbox.setAttribute('checked', true);
+    const main = document.querySelector('#formBody form');
+    const button = document.createElement("button");
+    button.innerText = "Add";
+    button.setAttribute('form', 'termSelectorForm');
+    button.setAttribute('id', 'submitButton');
+    document.querySelector('#formBody').appendChild(button);
 
-    englishDefs.appendChild(document.createElement('hr'));
-    englishDefs.appendChild(checkbox);
-    englishDefs.appendChild(label);
 }
 
-
-// localStorage.removeItem('word');
+if (word)
+    createForm();

@@ -1,15 +1,32 @@
-#main form {
+#formBody {
+    display: flex;
+    flex-direction: column;
+}
+
+#formBody hr {
+    margin: 0.2rem;
+}
+
+#formBody box {
+    padding: 0.2rem;
+}
+
+
+#formBody #termSelectorForm {
     display: flex;
     justify-content: center;
 }
 
-#main #words .reading {
+/* #main #words .reading {
     color: gray;
-}
+} */
 
-#main #words,
-#main #englishDefs {
+#formBody #Kanji,
+#formBody #Meaning,
+#formBody #Reading {
     text-align: center;
-    border: solid red;
+    border: double red;
     margin: 4px;
+    padding: 0.2rem;
+    flex: 1 1 auto;
 }

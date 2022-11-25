@@ -91,6 +91,10 @@ app.get('/search', (req, res) => {
 app.get('/add', isLoggedIn, (req, res) => {
     res.render('add', { title: 'Add word' });
 })
+app.post('/add', isLoggedIn, (req, res) => {
+    console.log(req.body);
+    res.send(req.body);
+})
 
 app.post('/', isLoggedIn, (req, res) => {
     res.render('index', { title: '' })
