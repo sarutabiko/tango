@@ -5,18 +5,20 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 
 const mongoose = require('mongoose');
-// const { Word } = require('./models/wordSchema');
 
 const session = require("express-session");
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
-const User = require('./models/user');
-const authRoutes = require('./routes/auth');
-const wordRoutes = require('./routes/words');
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 
-const ExpressError = require('./utils/ExpressError');
+// const { Word } = require('./models/wordSchema');
+const { User } = require('./models/user');
+const userRoutes = require('./routes/user');
+const wordRoutes = require('./routes/words');
+
+
+// const ExpressError = require('./utils/ExpressError');
 const { isLoggedIn } = require('./middleware');
 // mongo connection
 main()
@@ -70,7 +72,7 @@ app.use((req, res, next) => {
     res.locals.alert = req.flash('alert');
     res.locals.message = '';
     // console.log("req.session is: ", req.session);
-    console.log("res.locals is: ", res.locals);
+    // console.log("res.locals is: ", res.locals);
     next();
 })
 app.listen(3333, '0.0.0.0', () => {
@@ -81,19 +83,11 @@ app.get('/', (req, res) => {
     res.render('index', { title: "単語" });
 })
 
-app.use('/', authRoutes);
+app.use('/', userRoutes);
 app.use('/word', wordRoutes);
 
 app.get('/search', (req, res) => {
     res.render('search', { title: "Search" });
-})
-
-app.get('/add', isLoggedIn, (req, res) => {
-    res.render('add', { title: 'Add word' });
-})
-app.post('/add', isLoggedIn, (req, res) => {
-    console.log(req.body);
-    res.send(req.body);
 })
 
 app.post('/', isLoggedIn, (req, res) => {

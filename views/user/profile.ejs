@@ -1,0 +1,40 @@
+<% layout('layouts/boilerplate') %>
+
+    <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/flash.css">
+    </head>
+
+    <body>
+        <%- partial('partials/navbar') %>
+            <%- partial('partials/flash') %>
+                <div id="profileContent">
+                    <div id="left">
+                        <div id="profileBox">
+                            <h2>
+                                <%=getUser.username %>
+                            </h2>
+                            <hr>
+                            <h3>
+                                <%=getUser.email %>
+                            </h3>
+                            <hr>
+                            <h4>
+                                <%=getUser.totalWords%> words in <%=getUser.lists.length%> lists
+                            </h4>
+                            <hr>
+                            <a href="/logout" id="logout"><button class="submitButton">Log Out</button></a>
+                        </div>
+                        <div id="wordBox">
+                            <h2>ここで一つ単語だ</h2>
+                        </div>
+                    </div>
+
+
+                    <div id="listBox">
+                        <ul>
+                            Suspended words here. To be added to lists owned by the user.
+                        </ul>
+                    </div>
+
+                </div>
