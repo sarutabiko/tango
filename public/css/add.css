@@ -30,3 +30,21 @@
     padding: 0.2rem;
     flex: 1 1 auto;
 }
+
+#formBody #Kanji .entry,
+#formBody #Reading .entry {
+    font-size: larger;
+}
+
+@media (max-width: 900px) {
+    #formBody #termSelectorForm {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    #formBody #Kanji .entry,
+    #formBody #Reading .entry {
+        font-size: x-large;
+    }
+
+}
