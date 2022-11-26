@@ -18,5 +18,14 @@
 }
 
 button.hide {
+    font-weight: bold;
+    color: red;
     background-color: white;
+    border: solid red 0.1em;
+}
+
+button.hide:hover {
+    color: maroon;
+    background-color: rgb(255, 243, 245);
+    border: solid maroon 0.1em;
 }

@@ -94,3 +94,21 @@ a:visited {
 .dropdown-menu:hover .menu-content {
     display: block;
 }
+
+.submitButton {
+    display: block;
+    margin: 4px auto;
+    background-color: white;
+    color: red;
+    transition: all 0.2s;
+    font-size: large;
+    font-weight: bold;
+    border: 0.1em solid red;
+    width: fit-content;
+    padding: 0.35em 1.2em;
+}
+
+.submitButton:hover {
+    background-color: #f5eeee;
+    color: maroon;
+}

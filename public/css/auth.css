@@ -45,24 +45,6 @@
     word-wrap: break-word;
 }
 
-#credentials form button {
-    display: block;
-    margin: 4px auto;
-    background-color: white;
-    color: red;
-    transition: all 0.2s;
-    font-size: large;
-    font-weight: bold;
-    border: 0.1em solid red;
-    width: fit-content;
-    padding: 0.35em 1.2em;
-}
-
-#credentials form button:hover {
-    background-color: #f5eeee;
-    color: maroon;
-}
-
 #prompt {
     margin: 2rem;
     font-weight: bold;
