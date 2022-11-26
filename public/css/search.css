@@ -19,7 +19,8 @@
 
 #searchBar input {
     text-align: center;
-    flex-grow: 1;
+    /* flex-grow: 1; */
+    width: 100%;
     font-size: 150%;
     padding: 0 4px;
     margin: 4px;
