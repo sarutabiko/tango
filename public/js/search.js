@@ -6,17 +6,18 @@ const draw = async (searchResult) => {
 
     let def = document.getElementById('definitions');
 
+    // Clean the previous results if they exist 
     if (def) {
         def.innerHTML = "";
     }
     else {
         def = document.createElement('div');
-        def.setAttribute('id', 'definitions')
+        def.setAttribute('id', 'definitions');
+        document.getElementById('main').appendChild(def);
     }
 
-    document.getElementById('main').appendChild(def);
-    let index = 0;
-    for (let i of searchResult) {
+    // Create the list of search result entries and populate them
+    searchResult.forEach((i, index) => {
 
         const newUnit = document.createElement('div');
         newUnit.classList.add("Unit");
@@ -35,11 +36,12 @@ const draw = async (searchResult) => {
 
         plus.innerHTML = '+';
 
-        i.kanji.forEach(x => {
-            pre.innerText += x.join(', ');
-        });
-
-        pre.innerText += "\n";
+        if (i.kanji.length) {
+            i.kanji.forEach(x => {
+                pre.innerText += x.join(', ');
+            });
+            pre.innerText += "\n";
+        }
 
         i.reading.forEach(x => {
             pre.innerText += x.join(', ');
@@ -56,14 +58,14 @@ const draw = async (searchResult) => {
             pre.innerText += "\n";
         });
 
-    }
+    });
 
     // Add event listener on Plus button for adding words
     document.querySelectorAll('.plus').forEach(x => {
         x.addEventListener('click', function () {
-            console.log(mydata[parseInt(this.searchResult.i)]);
-            localStorage.setItem('word', JSON.stringify(response[parseInt(this.searchResult.i)]));
-            return window.location.replace("/add");
+            // console.log(searchResult[parseInt(this.dataset.i)]);
+            localStorage.setItem('word', JSON.stringify(searchResult[parseInt(this.dataset.i)]));
+            return window.location.replace("/word/add");
         });
     });
 }
@@ -71,7 +73,7 @@ const draw = async (searchResult) => {
 // displays last searched word results
 if (JSON.parse(localStorage.getItem('searchResult'))) {
     lastSearch = JSON.parse(localStorage.getItem('searchResult'));
-    console.log("FOund last word: ", lastSearch)
+    // console.log("FOund last word: ", lastSearch)
     draw(lastSearch);
 }
 
