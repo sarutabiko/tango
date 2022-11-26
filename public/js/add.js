@@ -20,10 +20,14 @@ const divConstructor = function (title, arr) {
     console.log("title is: ", title)
 
     arr.forEach(i => {
+        const entry = document.createElement("div");
+        entry.setAttribute('class', 'entry');
+
         const term = document.createElement("div");
         term.setAttribute('class', 'term');
 
         i.forEach(str => {
+
 
             const label = document.createElement('label');
             label.setAttribute('for', `${title}.${str}`);
@@ -40,9 +44,9 @@ const divConstructor = function (title, arr) {
             term.appendChild(label);
         });
 
-
+        entry.append(term);
+        box.appendChild(entry);
         main.appendChild(box);
-        box.appendChild(term);
 
     })
 }
@@ -55,11 +59,11 @@ const createForm = function () {
     divConstructor("Reading", word.reading);
     divConstructor("Meaning", word.meaning);
 
-    const main = document.querySelector('#formBody form');
     const button = document.createElement("button");
     button.innerText = "Add";
     button.setAttribute('form', 'termSelectorForm');
     button.setAttribute('id', 'submitButton');
+    button.setAttribute('class', 'submitButton');
     document.querySelector('#formBody').appendChild(button);
 
 }
