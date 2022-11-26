@@ -30,11 +30,41 @@
                         </div>
                     </div>
 
+                    <div id=right>
+                        <!-- <form action="">
+                                <input type="checkbox" id="selectAll">
+                            </form>
+                            Default List
+                            <br> -->
 
-                    <div id="listBox">
-                        <ul>
-                            Suspended words here. To be added to lists owned by the user.
-                        </ul>
+                        <table>
+                            <tr>
+                                <th colspan="4">Default List</th>
+                            </tr>
+                            <% getLists.some(x=>{if (x.name === 'Default'){%>
+                                <% x.words.forEach((word, index)=> {%>
+                                    <% if (index%4===0) {%>
+                                        <% if (index>0) {%> </tr>
+                                            <% }; %>
+                                                <tr>
+                                                    <% }; %>
+                                                        <td>
+                                                            <% if (word.Kanji.length) {%>
+                                                                <%= word.Kanji %>
+                                                                    <% } else {%>
+                                                                        <%= word.Reading %>
+                                                                            <% } %>
+                                                        </td>
+                                                        <% }); %>
+                                                </tr>
+                                                <% return true; }}); %>
+                        </table>
+
+                        <div id="listBox">
+                            Lists here
+                        </div>
                     </div>
 
                 </div>
+
+                <%- partial('partials/listSelect') %>

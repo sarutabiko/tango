@@ -2,6 +2,8 @@ const express = require('express');
 const passport = require('passport');
 const router = express.Router();
 const { User } = require("../models/user");
+const { Wordlist } = require('../models/wordSchema');
+const mongoose = require('mongoose');
 
 router.route('/auth')
     .get((req, res) => {
@@ -25,11 +27,36 @@ router.route('/auth')
 router.route('/user/:username')
     .get(async (req, res) => {
         const { username } = req.params;
+        console.log("current user: ", res.locals.currentUser);
+        let getLists = [];
         const getUser = await User.findOne({ username }).populate('lists');
+        if (res.locals.currentUser && res.locals.currentUser.username === username) {
+            getLists = await Wordlist.find({ owner: new mongoose.Types.ObjectId(res.locals.currentUser._id) }).populate('words');
+        }
+        else {
+            getLists = await Wordlist.find({ owner: new mongoose.Types.ObjectId(getUser._id), public: true }).populate('words');
+        }
         getUser.totalWords = 0;
         getUser.lists.forEach(list => { getUser.totalWords += list.words.length });
-        // console.log(getUser);
-        res.render('user/profile', { title: `${username}'s profile`, getUser })
+        console.log("getLists: ", getLists);
+        // console.log("ggetUser: ", getUser);
+        res.render('user/profile', { title: `${username}'s profile`, getUser, getLists })
+    })
+
+router.route('/user/:username/lists')
+    .get(async (req, res) => {
+        const { username } = req.params;
+        let lists;
+        if (res.locals.currentUser && currentUser === username) {
+            lists = await Wordlist.find({ owner: currentUser._id });
+        }
+        else {
+            // lists = await Wordlist.find({ owner: username, public: true })
+        }
+        if (lists.length)
+            res.send(lists);
+        else
+            res.status(404).send("Couldn't get lists");
     })
 
 router.get('/logout', (req, res) => {
