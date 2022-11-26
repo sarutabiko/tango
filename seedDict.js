@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const DictWord = require('./models/dictionaryWord');
+const { DictWord } = require('./models/dictionaryWord');
 
 // mongo connection
 main()

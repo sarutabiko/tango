@@ -15,26 +15,26 @@ async function main() {
 
 
 const w1 = new Word({
-    word: "単語",
-    reading: "たんご",
+    Kanji: ["単語"],
+    reading: ["たんご"],
     english: ["word", "vocabulary"]
 });
 
 (async function () { await w1.save(); })();
 
 const genkiV1 = [{
-    word: "ano",
-    reading: "ano",
-    english: "um..."
+    Kanji: [],
+    Reading: ["あの"],
+    Meaning: ["um..."]
 },
 {
-    word: "今",
-    reading: "いま",
-    english: "now"
+    Kanji: ["今"],
+    Reading: ["いま"],
+    Meaning: ["now"]
 }, {
-    word: "えいご",
-    reading: "えいご",
-    english: "English (language)"
+    Kanji: [],
+    Reading: ["えいご"],
+    Meaning: ["English (language)"]
 }];
 
 Word.insertMany(genkiV1)

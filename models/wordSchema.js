@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
 const word = new mongoose.Schema({
-    word: {
-        type: String
+    Kanji: {
+        type: [String]
     },
-    reading: {
-        type: String
+    Reading: {
+        type: [String]
     },
-    english: {
+    Meaning: {
         type: [String]
     }
 });
@@ -29,7 +29,8 @@ const wordlist = new mongoose.Schema({
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     }
 })
 

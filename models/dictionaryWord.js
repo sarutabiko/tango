@@ -20,4 +20,6 @@ const DictWordSchema = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('DictWord', DictWordSchema);
+
+const DictWord = mongoose.model('DictWord', DictWordSchema);
+module.exports = { DictWord };
