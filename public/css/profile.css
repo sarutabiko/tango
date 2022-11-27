@@ -3,6 +3,7 @@
     justify-content: center;
 }
 
+#profileContent #right,
 #profileContent #left {
     display: flex;
     flex-direction: column;
@@ -15,12 +16,15 @@
 
 #profileBox,
 #wordBox,
-#listBox {
+#listBox,
+table {
     margin: 4px;
     text-align: center;
     border: double red;
     padding: 4px;
+    border-collapse: collapse;
 }
+
 
 /* #profileBox h3, */
 #profileBox h3,
@@ -29,6 +33,43 @@
     margin: 2px 0;
 }
 
-#listBox {
-    width: 50vw;
+/* table */
+
+table {
+    border-collapse: collapse;
+    /* letter-spacing: 1px; */
+}
+
+td,
+th {
+    border: double 1px red;
+    padding: 10px 20px;
+}
+
+th {
+    background-color: rgb(255, 255, 255);
+}
+
+td {
+    text-align: center;
+}
+
+td.selectedCell {
+    background-color: cornsilk;
+}
+
+/* tr:nth-child(even) td {
+    background-color: rgb(255, 243, 243);
+}
+
+tr:nth-child(odd) td {
+    background-color: rgb(255, 230, 230);
+} */
+
+@media (max-width: 600px) {
+    #profileContent {
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+    }
 }

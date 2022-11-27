@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="/css/profile.css">
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/flash.css">
+    <link rel="stylesheet" href="/css/listSelect.css">
     </head>
 
     <body>
@@ -22,49 +23,70 @@
                             <h4>
                                 <%=getUser.totalWords%> words in <%=getUser.lists.length%> lists
                             </h4>
-                            <hr>
-                            <a href="/logout" id="logout"><button class="submitButton">Log Out</button></a>
+                            <% if (getUser.self) {%>
+
+                                <hr>
+                                <a href="/logout" id="logout"><button class="submitButton">Log Out</button></a>
+                                <% }%>
+
                         </div>
-                        <div id="wordBox">
-                            <h2>ここで一つ単語だ</h2>
-                        </div>
+                        <% if (getLists.length) {%>
+
+                            <div id="wordBox">
+                                List Selector ここで
+                                <br>
+                                <select name="pets" id="pet-select">
+                                    <option value="">--Please choose an option--</option>
+                                    <option value="dog">Dog</option>
+                                    <option value="cat">Cat</option>
+                                    <option value="hamster">Hamster</option>
+                                    <option value="parrot">Parrot</option>
+                                    <option value="spider">Spider</option>
+                                    <option value="goldfish">Goldfish</option>
+                                </select>
+                            </div>
+                            <% } %>
                     </div>
 
                     <div id=right>
-                        <!-- <form action="">
-                                <input type="checkbox" id="selectAll">
-                            </form>
-                            Default List
-                            <br> -->
 
-                        <table>
-                            <tr>
-                                <th colspan="4">Default List</th>
-                            </tr>
-                            <% getLists.some(x=>{if (x.name === 'Default'){%>
-                                <% x.words.forEach((word, index)=> {%>
-                                    <% if (index%4===0) {%>
-                                        <% if (index>0) {%> </tr>
-                                            <% }; %>
-                                                <tr>
-                                                    <% }; %>
-                                                        <td>
-                                                            <% if (word.Kanji.length) {%>
-                                                                <%= word.Kanji %>
-                                                                    <% } else {%>
-                                                                        <%= word.Reading %>
-                                                                            <% } %>
-                                                        </td>
-                                                        <% }); %>
-                                                </tr>
-                                                <% return true; }}); %>
-                        </table>
+                        <% if (getUser.self) {%>
 
-                        <div id="listBox">
-                            Lists here
-                        </div>
+                            <table>
+                                <tr>
+                                    <th colspan="4">Unlisted Words</th>
+                                </tr>
+                                <% getLists.some(x=>{if (x.name === 'Default'){%>
+                                    <% x.words.forEach((word, index)=> {%>
+                                        <% if (index%4===0) {%>
+                                            <% if (index>0) {%> </tr>
+                                                <% }; %>
+                                                    <tr>
+                                                        <% }; %>
+                                                            <td data-i="<%=index%>">
+                                                                <% if (word.Kanji.length) {%>
+                                                                    <%= word.Kanji %>
+                                                                        <% } else {%>
+                                                                            <%= word.Reading %>
+                                                                                <% } %>
+                                                            </td>
+                                                            <% }); %>
+                                                    </tr>
+                                                    <% return true; }}); %>
+                            </table>
+                            <button class="submitButton" id="addToListButton" disabled>Add to List</button>
+                            <div id="listBox">
+                                Word Preview/Word of the day?
+                                <hr>
+                                <span style="border-right: solid black 2px; padding: 0 4px;"> Kanji </span>
+                                <span style="border-right: solid black 2px; padding: 0 4px;"> Reading </span>
+                                <span style="border-right: solid black 2px; padding: 0 4px;"> Meaning </span>
+                            </div>
+                            <% } %>
                     </div>
 
                 </div>
 
                 <%- partial('partials/listSelect') %>
+
+                    <script src="/js/profile.js"></script>
