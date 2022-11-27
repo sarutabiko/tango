@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+}
+
 const express = require("express");
 const path = require("path");
 const methodOverride = require("method-override");
@@ -72,7 +76,7 @@ app.use((req, res, next) => {
     res.locals.alert = req.flash('alert');
     res.locals.message = '';
     // console.log("req.session is: ", req.session);
-    // console.log("res.locals is: ", res.locals);
+    console.log("res.locals is: ", res.locals);
     next();
 })
 app.listen(3333, '0.0.0.0', () => {
