@@ -1,0 +1,6 @@
+@font-face {
+    font-family: 'Noto Serif JP';
+    font-style: normal;
+    font-display: swap;
+    src: url('../fonts/NotoSerifJP-Regular.otf') format('opentype');
+}
