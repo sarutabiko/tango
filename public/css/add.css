@@ -25,7 +25,7 @@
 #formBody #Meaning,
 #formBody #Reading {
     text-align: center;
-    border: double red;
+    border: double 4px red;
     margin: 4px;
     padding: 0.2rem;
     flex: 1 1 auto;

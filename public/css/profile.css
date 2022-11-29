@@ -20,7 +20,7 @@
 table {
     margin: 4px;
     text-align: center;
-    border: double red;
+    border: double 4px red;
     padding: 4px;
     border-collapse: collapse;
 }
@@ -34,17 +34,17 @@ table {
 }
 
 /* table */
-
-table {
-    border-collapse: collapse;
-    /* letter-spacing: 1px; */
-}
-
-td,
 th {
-    border: double 1px red;
+    border: double 2px red;
     padding: 10px 20px;
 }
+
+td {
+    border: double 2px red;
+    padding: 10px 20px;
+    border-spacing: 0ch;
+}
+
 
 th {
     background-color: rgb(255, 255, 255);
@@ -52,6 +52,10 @@ th {
 
 td {
     text-align: center;
+}
+
+td:hover {
+    background-color: lavender;
 }
 
 td.selectedCell {
