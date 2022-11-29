@@ -1,0 +1,26 @@
+<div id="selectListBox" style="display: none;">
+
+    <%- partial('partials/flash') %>
+        <div id="chooseList">
+            <label for="list-select">Choose List:</label>
+            <select name="list-select" id="list-select">
+                <% getLists.forEach(listref=> {%>
+                    <option value="<%=listref._id%>" <% if (listref.name==='Unlisted' ) {%> disabled <%} %>"
+                            name="listID">
+                            <%=listref.name %>
+                    </option>
+                    <%}) %>
+                        <option value="">--Create new list--</option>
+                        <option value="goldfish" name="listID">Goldfish</option>
+            </select>
+            <button class="submitButton" id="sendListButton">Select</button>
+        </div>
+
+        <hr>
+        <div id="createList">
+            <label for="newListName">Create New List:</label>
+            <input type="text" id="newListName" name="newListName">
+            <button class="submitButton" id="createListButton">Create</button>
+        </div>
+
+</div>
