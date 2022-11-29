@@ -1,4 +1,4 @@
-#selectList {
+#selectListBox {
     box-shadow: 0px 0px 1px 5000px rgba(0, 0, 0, 0.4);
 
     background-color: white;
@@ -24,8 +24,24 @@
     padding: 1rem 2rem 1rem 2rem;
 }
 
-#selectList div {
-    text-align: center;
+#list-select,
+#newListName {
+    margin: auto 4px;
+}
+
+#createList {
+    display: none;
+}
+
+#chooseList,
+#createList {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#newListName {
+    width: 100px;
 }
 
 /* 
