@@ -4,6 +4,8 @@ const router = express.Router();
 const { User } = require("../models/user");
 const { Wordlist } = require('../models/wordSchema');
 const mongoose = require('mongoose');
+const { promptLogin, isLoggedIn, isAuthorised } = require('../middleware');
+
 
 router.route('/auth')
     .get((req, res) => {
@@ -25,23 +27,58 @@ router.route('/auth')
     });
 
 router.route('/user/:username')
-    .get(async (req, res) => {
+    .get(async (req, res, next) => {
         const { username } = req.params;
-        console.log("current user: ", res.locals.currentUser);
+        // console.log("current user: ", res.locals.currentUser);
         let getLists = [];
-        const getUser = await User.findOne({ username }).populate('lists');
-        if (res.locals.currentUser && res.locals.currentUser.username === username) {
-            getLists = await Wordlist.find({ owner: new mongoose.Types.ObjectId(res.locals.currentUser._id) }).populate('words');
+        try {
+            const getUser = await User.findOne({ username }).populate('lists');
+            if (!getUser) {
+                const err = new Error("User not found")
+                err.statusCode = 404;
+                throw err;
+
+            }
+
+            if (res.locals.currentUser && res.locals.currentUser.username === username) {
+                getUser.self = true;
+                getLists = await Wordlist.find({ owner: new mongoose.Types.ObjectId(res.locals.currentUser._id) }).populate('words');
+            }
+            else {
+                getLists = await Wordlist.find({ owner: new mongoose.Types.ObjectId(getUser._id), public: true }).populate('words');
+            }
+            getUser.totalWords = 0;
+            getUser.lists.forEach(list => { getUser.totalWords += list.words.length });
+            // console.log("getLists: ", getLists);
+            // console.log("ggetUser: ", getUser);
+            res.render('user/profile', { title: `${username}'s profile`, getUser, getLists })
+        } catch (error) {
+            next(error);
         }
-        else {
-            getLists = await Wordlist.find({ owner: new mongoose.Types.ObjectId(getUser._id), public: true }).populate('words');
-        }
-        getUser.totalWords = 0;
-        getUser.lists.forEach(list => { getUser.totalWords += list.words.length });
-        console.log("getLists: ", getLists);
-        // console.log("ggetUser: ", getUser);
-        res.render('user/profile', { title: `${username}'s profile`, getUser, getLists })
+
+
     })
+    .post(
+        isLoggedIn,
+        async (req, res) => {
+            const { selectedCells: indexString, listID, defaultID } = req.body;
+            const indexArray = indexString.split(',');
+            console.log("indexArray is: ", indexArray)
+
+            const listToInsert = await Wordlist.findById(listID);
+            const defaultList = await Wordlist.findById(defaultID);
+            console.log("listToInsert is: ", listToInsert)
+            console.log("defaultList is: ", defaultList)
+
+            indexArray.forEach(wordI => {
+                listToInsert.words.push(defaultList.words[wordI]);
+                defaultList.words.splice(wordI, 1);
+            })
+            await listToInsert.save();
+            await defaultList.save();
+
+            res.send({ indexArray, listID, defaultID });
+        })
 
 router.route('/user/:username/lists')
     .get(async (req, res) => {
@@ -57,6 +94,16 @@ router.route('/user/:username/lists')
             res.send(lists);
         else
             res.status(404).send("Couldn't get lists");
+    })
+    .post(isLoggedIn, async (req, res) => {
+        console.log(req.body);
+        const { name } = req.body;
+        const user = await User.findById(res.locals.currentUser._id);
+        const newList = await Wordlist.create({ name: name, owner: res.locals.currentUser._id });
+        user.lists.push(newList._id)
+        user.save();
+        console.log("newList created: ", newList);
+        res.send(newList);
     })
 
 router.get('/logout', (req, res) => {
@@ -89,5 +136,7 @@ router.post('/register', async (req, res) => {
         // res.redirect('/auth');
     }
 })
+
+
 
 module.exports = router;

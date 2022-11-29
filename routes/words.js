@@ -21,12 +21,12 @@ router.post('/add', isLoggedIn, async (req, res) => {
     const user = await User.findById(res.locals.currentUser._id);
     // console.log(user);
     if (!(user.lists.length)) {
-        console.log("creating defauult list")
-        user.lists.push(await Wordlist.create({ name: "Default", owner: user._id }))
+        // console.log("creating defauult list")
+        user.lists.push(await Wordlist.create({ name: "Unlisted", owner: user._id }))
     }
     await user.save();
 
-    const defaultList = await Wordlist.findOne({ owner: user._id, name: 'Default' });
+    const defaultList = await Wordlist.findOne({ owner: user._id, name: 'Unlisted' });
     defaultList.words.push(wordInDB._id);
     defaultList.save();
     // console.log(defaultList);
@@ -45,12 +45,26 @@ router.get('/:wordid', async (req, res, next) => {
     }
 })
 
-router.get('/:user/:listID',
-    isLoggedIn,
-    isAuthorised,
-    async (req, res, next) => {
-        res.send(res.locals.wordlist);
+router.route('/lists/:listID')
+    .get(async (req, res) => {
+        const { listID } = req.params;
+        const getList = await Wordlist.findById(listID).populate('words');
+        // console.log('is authorised: ', res.locals.currentUser._id.equals(getList.owner))
+        if (getList.public || (res.locals.currentUser && res.locals.currentUser._id.equals(getList.owner))) {
+            res.send(getList);
+        }
+        else {
+            res.status(403).send("Not Authorised to view list");
+        }
     })
+
+// router.get('/:user/:listID',
+//     isLoggedIn,
+//     isAuthorised,
+//     async (req, res, next) => {
+//         res.send(res.locals.wordlist);
+//     })
+
 
 router.post('/search', async (req, res) => {
     const { query } = req.body;
