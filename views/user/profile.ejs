@@ -35,58 +35,68 @@
                             <div id="wordBox">
                                 List Selector ここで
                                 <br>
-                                <select name="pets" id="pet-select">
-                                    <option value="">--Please choose an option--</option>
-                                    <option value="dog">Dog</option>
-                                    <option value="cat">Cat</option>
-                                    <option value="hamster">Hamster</option>
-                                    <option value="parrot">Parrot</option>
-                                    <option value="spider">Spider</option>
-                                    <option value="goldfish">Goldfish</option>
-                                </select>
+
+                                <button class="submitButton"> Edit Lists</button>
                             </div>
                             <% } %>
                     </div>
 
                     <div id=right>
 
-                        <% if (getUser.self) {%>
+                        <% if (getLists.length) {%>
 
                             <table>
-                                <tr>
-                                    <th colspan="4">Unlisted Words</th>
-                                </tr>
-                                <% getLists.some(x=>{if (x.name === 'Default'){%>
-                                    <% x.words.forEach((word, index)=> {%>
-                                        <% if (index%4===0) {%>
-                                            <% if (index>0) {%> </tr>
-                                                <% }; %>
-                                                    <tr>
-                                                        <% }; %>
-                                                            <td data-i="<%=index%>">
-                                                                <% if (word.Kanji.length) {%>
-                                                                    <%= word.Kanji %>
-                                                                        <% } else {%>
-                                                                            <%= word.Reading %>
-                                                                                <% } %>
-                                                            </td>
-                                                            <% }); %>
-                                                    </tr>
-                                                    <% return true; }}); %>
+                                <tbody>
+                                    <tr>
+                                        <th colspan="4">
+                                            <select name="list-select" id="list-viewer">
+                                                <% getLists.forEach(listref=> {%>
+                                                    <option value="<%=listref._id%>" <% if (listref.name==='Unlisted' )
+                                                        {%>
+                                                        id="unlisted"
+                                                        <%} %>
+                                                            name="listID">
+                                                            <%=listref.name %>
+                                                    </option>
+                                                    <%}) %>
+                                            </select>
+                                            Unlisted Words or are they
+                                        </th>
+                                    </tr>
+                                    <% getLists.some(x=>{if (x.name === 'Unlisted'){%>
+                                        <% x.words.forEach((word, index)=> {%>
+                                            <% if (index%4===0) {%>
+                                                <% if (index>0) {%> </tr>
+                                                    <% }; %>
+                                                        <tr>
+                                                            <% }; %>
+                                                                <td data-i="<%=index%>">
+                                                                    <% if (word.Kanji.length) {%>
+                                                                        <%= word.Kanji %>
+                                                                            <% } else {%>
+                                                                                <%= word.Reading %>
+                                                                                    <% } %>
+                                                                </td>
+                                                                <% }); %>
+                                                        </tr>
+                                                        <% return true; }}); %>
+                                </tbody>
                             </table>
                             <button class="submitButton" id="addToListButton" disabled>Add to List</button>
-                            <div id="listBox">
-                                Word Preview/Word of the day?
-                                <hr>
-                                <span style="border-right: solid black 2px; padding: 0 4px;"> Kanji </span>
-                                <span style="border-right: solid black 2px; padding: 0 4px;"> Reading </span>
-                                <span style="border-right: solid black 2px; padding: 0 4px;"> Meaning </span>
-                            </div>
                             <% } %>
+                                <% if (getLists.length) {%>
+                                    <div id="listBox">
+                                        Word Preview/Word of the day?
+                                        <hr>
+                                        <span style="border-right: solid black 2px; padding: 0 4px;"> Kanji </span>
+                                        <span style="border-right: solid black 2px; padding: 0 4px;"> Reading </span>
+                                        <span style="border-right: solid black 2px; padding: 0 4px;"> Meaning </span>
+                                    </div>
+                                    <% } %>
                     </div>
 
                 </div>
 
-                <%- partial('partials/listSelect') %>
+                <%- partial('partials/listSelectBox') %>
 
                     <script src="/js/profile.js"></script>
