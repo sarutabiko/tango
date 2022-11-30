@@ -16,15 +16,34 @@ module.exports.isLoggedIn = (req, res, next) => {
     next();
 }
 
-module.exports.isAuthorised = async (req, res, next) => {
-    const { listID } = req.params;
+// Both of these middle are used to check if a user is authorised to view/modify Wordlists
+// Words will be managed wihtout user input
+module.exports.isAuthorisedToView = async (req, res, next) => {
+    const { listID } = req.body;
     try {
         const wordlist = await Wordlist.findById(listID).populate('owner');
         if (wordlist.public) {
             res.locals.wordlist = wordlist;
             return next();
         }
-        else if (wordlist.owner == currentUser._id) {
+        else if (res.locals.currentUser._id.equals(wordlist.owner)) {
+            res.locals.wordlist = wordlist;
+            return next();
+        }
+        else
+            res.status(403).send("You don't have the right");
+    } catch (error) {
+        next(error);
+    }
+
+}
+
+module.exports.isOwner = async (req, res, next) => {
+    console.log('in isOwner: ', req.body);
+    const { listID } = req.body;
+    try {
+        const wordlist = await Wordlist.findById(listID);
+        if (res.locals.currentUser._id.equals(wordlist.owner)) {
             res.locals.wordlist = wordlist;
             return next();
         }
