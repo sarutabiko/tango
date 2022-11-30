@@ -10,6 +10,13 @@
     justify-content: start;
 }
 
+
+#profileContent #right div,
+#profileContent #left div {
+    background-color: white;
+
+}
+
 #wordbox {
     margin-top: auto;
 }
@@ -34,20 +41,30 @@ table {
 }
 
 /* table */
+th div {
+    display: inline-block;
+}
+
+tr {
+    /* display: flex; */
+    align-items: center;
+    justify-content: space-between;
+}
+
 th {
-    border: double 2px red;
-    padding: 10px 20px;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: space-between; */
+    /* border: double 2px red; */
+    padding: 0;
+    background-color: rgb(255, 255, 255);
 }
 
 td {
     border: double 2px red;
     padding: 10px 20px;
     border-spacing: 0ch;
-}
-
-
-th {
-    background-color: rgb(255, 255, 255);
+    font-size: x-large;
 }
 
 td {
@@ -76,4 +93,14 @@ tr:nth-child(odd) td {
         justify-content: flex-start;
         flex-direction: column;
     }
+}
+
+#buttonBox {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#buttonBox .submitButton {
+    display: inline-block;
 }

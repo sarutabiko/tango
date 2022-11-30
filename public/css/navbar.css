@@ -128,11 +128,16 @@ a:visited {
 select {
     margin: 4px auto;
     text-align-last: center;
-    padding: 4px;
+    padding: 0.5rem 1rem;
     /* width: 200px; */
     background-color: white;
     color: red;
-    border: 4px double red;
+    border-top: 4px red;
+    border-bottom: 4px red;
+    border-right: 1px solid red;
+    border-left: 1px solid red;
+    border-style: double solid double solid;
+    /* text-decoration: underline; */
     font: inherit;
     -webkit-appearance: none;
 }
@@ -140,4 +145,8 @@ select {
 select:hover {
     background-color: #f5eeee;
     color: maroon;
+}
+
+i {
+    color: red;
 }
