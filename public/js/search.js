@@ -79,9 +79,13 @@ if (JSON.parse(localStorage.getItem('searchResult'))) {
 
 // Launches the search ie a post request to /search with query param
 goButton.addEventListener('click', async () => {
+    clearFlash('alertFlash');
+
     const query = document.getElementById('queryString').value;
     // console.log("query text: ", query)
 
+    const searchResults = document.getElementById('definitions');
+    searchResults.setAttribute('style', 'opacity: 0.5;');
     // fetch request to /search here
     const response = await fetch('/word/search', {
         method: 'POST',
@@ -89,8 +93,14 @@ goButton.addEventListener('click', async () => {
         body: new URLSearchParams(`query=${query}`)
     }).then(res => res.json());
 
-    if (response && response.length) {
-        localStorage.setItem('searchResult', JSON.stringify(response));
-        draw(response);
+    // console.log(response);
+    if (response.results && response.results.length) {
+        localStorage.setItem('searchResult', JSON.stringify(response.results));
+        draw(response.results);
     }
+    else {
+        immediateFlash('alertFlash', `No results found for: ${response.query} `);
+        // searchResults.insertAdjacentHTML('beforebegin', `<div class="alertFlash" role="alert"><button class="hide" onclick="closeButton(this)"><span>&times;</span></button></div>`);
+    }
+    searchResults.removeAttribute('style');
 });
