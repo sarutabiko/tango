@@ -1,8 +1,8 @@
 <% layout('layouts/boilerplate') %>
 
-    <link rel="stylesheet" href="/css/profile.css">
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/flash.css">
+    <link rel="stylesheet" href="/css/profile.css">
     <link rel="stylesheet" href="/css/listSelect.css">
     </head>
 
@@ -23,7 +23,7 @@
                             <h4>
                                 <%=getUser.totalWords%> words in <%=getUser.lists.length%> lists
                             </h4>
-                            <% if (getUser.self) {%>
+                            <% if (loggedIn && loggedIn.self) {%>
 
                                 <hr>
                                 <a href="/logout" id="logout"><button class="submitButton">Log Out</button></a>
@@ -49,54 +49,71 @@
                                 <tbody>
                                     <tr>
                                         <th colspan="4">
-                                            <select name="list-select" id="list-viewer">
-                                                <% getLists.forEach(listref=> {%>
-                                                    <option value="<%=listref._id%>" <% if (listref.name==='Unlisted' )
-                                                        {%>
-                                                        id="unlisted"
-                                                        <%} %>
-                                                            name="listID">
-                                                            <%=listref.name %>
-                                                    </option>
-                                                    <%}) %>
-                                            </select>
-                                            Unlisted Words or are they
+                                            <div>
+                                                <i class="fa-solid fa-chevron-right" style="color:green;"> </i>
+                                                <select name="list-select" id="list-viewer">
+                                                    <% getLists.forEach(listref=> {%>
+                                                        <option value="<%=listref._id%>" <% if
+                                                            (listref.name==='Unlisted' ) {%>
+                                                            id="unlisted"
+                                                            <%} %>
+                                                                name="listID">
+                                                                <%=listref.name %>
+                                                        </option>
+                                                        <%}) %>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <span style="margin: auto 8px;">
+                                                    <%=getLists[0].words.length%> words
+                                                </span>
+                                            </div>
                                         </th>
                                     </tr>
-                                    <% getLists.some(x=>{if (x.name === 'Unlisted'){%>
-                                        <% x.words.forEach((word, index)=> {%>
-                                            <% if (index%4===0) {%>
-                                                <% if (index>0) {%> </tr>
-                                                    <% }; %>
-                                                        <tr>
-                                                            <% }; %>
-                                                                <td data-i="<%=index%>">
-                                                                    <% if (word.Kanji.length) {%>
-                                                                        <%= word.Kanji %>
-                                                                            <% } else {%>
-                                                                                <%= word.Reading %>
-                                                                                    <% } %>
-                                                                </td>
-                                                                <% }); %>
-                                                        </tr>
-                                                        <% return true; }}); %>
+                                    <% getLists[0].words.forEach((word, index)=> {%>
+                                        <% if (index%4===0) {%>
+                                            <% if (index>0) {%> </tr>
+                                                <% }; %>
+                                                    <tr>
+                                                        <% }; %>
+                                                            <td data-i="<%=index%>">
+                                                                <% if (word.Kanji.length) {%>
+                                                                    <%= word.Kanji[0] %>
+                                                                        <% } else {%>
+                                                                            <%= word.Reading[0] %>
+                                                                                <% } %>
+                                                            </td>
+                                                            <% }); %>
+                                                    </tr>
                                 </tbody>
                             </table>
-                            <button class="submitButton" id="addToListButton" disabled>Add to List</button>
                             <% } %>
-                                <% if (getLists.length) {%>
-                                    <div id="listBox">
-                                        Word Preview/Word of the day?
-                                        <hr>
-                                        <span style="border-right: solid black 2px; padding: 0 4px;"> Kanji </span>
-                                        <span style="border-right: solid black 2px; padding: 0 4px;"> Reading </span>
-                                        <span style="border-right: solid black 2px; padding: 0 4px;"> Meaning </span>
+                                <% if (loggedIn) {%>
+                                    <div id="buttonBox">
+                                        <button class="submitButton" id="addToListButton" disabled>Add to List</button>
+                                        <% if (loggedIn.self) {%>
+                                            <button class="submitButton" id="deleteButton" disabled>Delete</button>
+                                            <% } %>
                                     </div>
                                     <% } %>
+                                        <% if (getLists.length) {%>
+                                            <div id="listBox">
+                                                Word Preview/Word of the day?
+                                                <hr>
+                                                <span style="border-right: solid black 2px; padding: 0 4px;"> Kanji
+                                                </span>
+                                                <span style="border-right: solid black 2px; padding: 0 4px;"> Reading
+                                                </span>
+                                                <span style="border-right: solid black 2px; padding: 0 4px;"> Meaning
+                                                </span>
+                                            </div>
+                                            <% } %>
                     </div>
 
                 </div>
 
-                <%- partial('partials/listSelectBox') %>
+                <%if (loggedIn) {%>
+                    <%- partial('partials/listSelectBox') %>
+                        <% } %>
 
-                    <script src="/js/profile.js"></script>
+                            <script src="/js/profile.js"></script>
