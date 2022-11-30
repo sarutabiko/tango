@@ -17,8 +17,3 @@ const changeH1 = () => () => {
 };
 
 setInterval(changeH1(), 7000);
-
-const flashX = document.querySelectorAll(".hide");
-for (let X of flashX) {
-    X.addEventListener('click', function () { this.parentElement.setAttribute('style', 'display:none') })
-}
