@@ -9,7 +9,13 @@ const word = new mongoose.Schema({
     },
     Meaning: {
         type: [String]
-    }
+    },
+    lists: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Wordlist'
+        }
+    ]
 });
 
 const wordlist = new mongoose.Schema({
