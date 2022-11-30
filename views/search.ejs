@@ -9,7 +9,8 @@
             <%- partial('partials/flash') %>
                 <div id="main">
                     <div id="searchBar">
-                        <input type="text" name="query" placeholder="Enter word" id="queryString" autofocus>
+                        <input type="text" name="query" placeholder="Enter word" id="queryString" onkeydown="if (event.keyCode == 13)
+                        document.getElementById('go').click()" autofocus>
                         <button id="go">GO
                         </button>
                     </div>
