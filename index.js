@@ -24,6 +24,7 @@ const wordRoutes = require('./routes/words');
 
 // const ExpressError = require('./utils/ExpressError');
 const { isLoggedIn } = require('./middleware');
+const { Wordlist } = require('./models/wordSchema');
 // mongo connection
 main()
     .then(() => {
@@ -76,15 +77,16 @@ app.use((req, res, next) => {
     res.locals.alert = req.flash('alert');
     res.locals.message = '';
     // console.log("req.session is: ", req.session);
-    console.log("res.locals is: ", res.locals);
+    // console.log("res.locals is: ", res.locals);
     next();
 })
 app.listen(3333, '0.0.0.0', () => {
     console.log("App is listening on 3333 port.");
 })
 
-app.get('/', (req, res) => {
-    res.render('index', { title: "単語" });
+app.get('/', async (req, res) => {
+    const publicList = await Wordlist.findOne({ public: true }).populate('words').populate('owner');
+    res.render('index', { title: "単語", publicList });
 })
 
 app.use('/', userRoutes);
@@ -97,7 +99,6 @@ app.get('/search', (req, res) => {
 app.post('/', isLoggedIn, (req, res) => {
     res.render('index', { title: '' })
 })
-
 
 app.use((err, req, res, next) => {
     console.log("Something went wrong!");
