@@ -13,7 +13,7 @@
                 <div id="main">
                     <div id="wordlist">
                         <ul>
-                            <% if (publicList.length) {%>
+                            <% if (publicList && publicList.length) {%>
                                 <a href="/user/<%=publicList.owner.username%>">
                                     <% for (word of publicList.words) {%>
                                         <li>
