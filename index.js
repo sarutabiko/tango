@@ -27,17 +27,26 @@ const { isLoggedIn } = require('./middleware');
 const { Wordlist } = require('./models/wordSchema');
 
 // mongo connection
-// const dbURL = process.env.DB_URL;
-const dbURL = 'mongodb://127.0.0.1:27017/tango'
+const dbURL = process.env.DB_URL;
+// const dbURL = 'mongodb://127.0.0.1:27017/tango'
 main()
     .then(() => {
         console.log("Database Connection Successful!!!");
+        app.listen(3333, '0.0.0.0', () => {
+            console.log("App is listening on 3333 port.");
+        })
     })
     .catch(
         err => { console.log("Ooops error!!!"); console.log(err); });
 
 async function main() {
-    await mongoose.connect(dbURL);
+    try {
+        const conn = await mongoose.connect(dbURL);
+        console.log(`MongoDB Connected: ${conn.connection.host}`);
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
 }
 
 //express route handling
@@ -83,9 +92,7 @@ app.use((req, res, next) => {
     // console.log("res.locals is: ", res.locals);
     next();
 })
-app.listen(3333, '0.0.0.0', () => {
-    console.log("App is listening on 3333 port.");
-})
+
 
 app.get('/', async (req, res) => {
     const publicList = await Wordlist.findOne({ public: true }).populate('words').populate('owner');
