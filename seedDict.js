@@ -1,17 +1,24 @@
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+}
 const mongoose = require('mongoose');
 const { DictWord } = require('./models/dictionaryWord');
 
 // mongo connection
+const dbURL = process.env.DB_URL;
+// const dbURL = 'mongodb://127.0.0.1:27017/tango'
 main()
     .then(() => {
-        console.log("Connection Open!!!");
+        console.log("Database Connection Successful!!!");
     })
     .catch(
         err => { console.log("Ooops error!!!"); console.log(err); });
 
 async function main() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/tango');
+    console.log('dbURL is: ', dbURL);
+    await mongoose.connect(dbURL);
 }
+
 
 const toUpload = require("./MongoReadyDict.json");
 

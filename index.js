@@ -25,7 +25,10 @@ const wordRoutes = require('./routes/words');
 // const ExpressError = require('./utils/ExpressError');
 const { isLoggedIn } = require('./middleware');
 const { Wordlist } = require('./models/wordSchema');
+
 // mongo connection
+// const dbURL = process.env.DB_URL;
+const dbURL = 'mongodb://127.0.0.1:27017/tango'
 main()
     .then(() => {
         console.log("Database Connection Successful!!!");
@@ -34,7 +37,7 @@ main()
         err => { console.log("Ooops error!!!"); console.log(err); });
 
 async function main() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/tango');
+    await mongoose.connect(dbURL);
 }
 
 //express route handling
