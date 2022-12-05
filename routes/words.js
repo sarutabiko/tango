@@ -106,7 +106,20 @@ router.post('/search', body('query').escape(), async (req, res) => {
     }
     const { query } = req.body;
     // console.log("search query is: ", query);
-    const results = await DictWord.find({ meaning: { $elemMatch: { $elemMatch: { $in: [query] } } } });
+
+    let results;
+    // console.log('query is: ', query);
+    if (query.match(/[a-z]/i))
+        results = await DictWord.find({ meaning: { $elemMatch: { $elemMatch: { $in: [query] } } } });
+    else {
+        // readingSearch = await DictWord.find({ reading: { $elemMatch: { $elemMatch: { $in: [query] } } } });
+        // kanjiSearch = await DictWord.find({ kanji: { $elemMatch: { $elemMatch: { $in: [query] } } } });
+        let [readingSearch, kanjiSearch] = await Promise.all([
+            DictWord.find({ reading: { $elemMatch: { $elemMatch: { $in: [query] } } } }),
+            DictWord.find({ kanji: { $elemMatch: { $elemMatch: { $in: [query] } } } })
+        ])
+        results = readingSearch.concat(kanjiSearch);
+    }
     // console.log(results);
     res.send({ query, results });
 })
