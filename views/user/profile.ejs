@@ -88,7 +88,7 @@
                                 </tbody>
                             </table>
                             <% } %>
-                                <% if (loggedIn) {%>
+                                <% if (loggedIn && getLists.length) {%>
                                     <div id="buttonBox">
                                         <button class="submitButton" id="addToListButton" disabled>Add to List</button>
                                         <% if (loggedIn.self) {%>
