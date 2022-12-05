@@ -13,14 +13,14 @@
                 <div id="main">
                     <div id="wordlist">
                         <ul>
-                            <% if (publicList && publicList.length) {%>
+                            <% if (publicList && publicList.words.length) {%>
                                 <a href="/user/<%=publicList.owner.username%>">
                                     <% for (word of publicList.words) {%>
                                         <li>
                                             <% if (word.Kanji.length) {%>
                                                 <%=word.Kanji[0] %>
                                                     <% } else {%>
-                                                        <%=word.Kanji[1] %>
+                                                        <%=word.Reading[0] %>
                                                             <% } %>
                                         </li>
                                         <hr>
