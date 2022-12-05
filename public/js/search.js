@@ -85,7 +85,9 @@ goButton.addEventListener('click', async () => {
     // console.log("query text: ", query)
 
     const searchResults = document.getElementById('definitions');
-    searchResults.setAttribute('style', 'opacity: 0.5;');
+    if (searchResults)
+        searchResults.setAttribute('style', 'opacity: 0.5;');
+    goButton.setAttribute('style', 'background-color: cornsilk;');
     // fetch request to /search here
     const response = await fetch('/word/search', {
         method: 'POST',
@@ -102,5 +104,7 @@ goButton.addEventListener('click', async () => {
         immediateFlash('alertFlash', `No results found for: ${response.query} `);
         // searchResults.insertAdjacentHTML('beforebegin', `<div class="alertFlash" role="alert"><button class="hide" onclick="closeButton(this)"><span>&times;</span></button></div>`);
     }
-    searchResults.removeAttribute('style');
+    if (searchResults)
+        searchResults.removeAttribute('style');
+    goButton.removeAttribute('style');
 });
