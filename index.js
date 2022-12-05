@@ -9,6 +9,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 
 const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo');
 
 const session = require("express-session");
 const passport = require('passport');
@@ -71,7 +72,11 @@ const sessionConfig = {
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7,
         sameSite: 'strict'
-    }
+    },
+    store: MongoStore.create({
+        mongoUrl: dbURL,
+        autoRemove: 'disabled'
+    })
 }
 app.use(session(sessionConfig));
 app.use(passport.initialize());
