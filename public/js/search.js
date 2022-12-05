@@ -65,7 +65,7 @@ const draw = async (searchResult) => {
         x.addEventListener('click', function () {
             // console.log(searchResult[parseInt(this.dataset.i)]);
             localStorage.setItem('word', JSON.stringify(searchResult[parseInt(this.dataset.i)]));
-            return window.location.replace("/word/add");
+            return window.location.assign("/word/add");
         });
     });
 }
@@ -84,10 +84,12 @@ goButton.addEventListener('click', async () => {
     const query = document.getElementById('queryString').value;
     // console.log("query text: ", query)
 
+    // Dim the current results if they exist
     const searchResults = document.getElementById('definitions');
     if (searchResults)
         searchResults.setAttribute('style', 'opacity: 0.5;');
     goButton.setAttribute('style', 'background-color: cornsilk;');
+
     // fetch request to /search here
     const response = await fetch('/word/search', {
         method: 'POST',
@@ -104,6 +106,8 @@ goButton.addEventListener('click', async () => {
         immediateFlash('alertFlash', `No results found for: ${response.query} `);
         // searchResults.insertAdjacentHTML('beforebegin', `<div class="alertFlash" role="alert"><button class="hide" onclick="closeButton(this)"><span>&times;</span></button></div>`);
     }
+
+    // Undim
     if (searchResults)
         searchResults.removeAttribute('style');
     goButton.removeAttribute('style');
