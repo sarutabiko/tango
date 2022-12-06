@@ -21,7 +21,7 @@
                             </h3>
                             <hr>
                             <h4>
-                                <%=getUser.totalWords%> words in <%=getUser.lists.length%> lists
+                                <%=getUser.wordCount%> words in <%=getUser.listCount%> lists
                             </h4>
                             <% if (loggedIn && loggedIn.self) {%>
 
@@ -76,7 +76,7 @@
                                                 <% }; %>
                                                     <tr>
                                                         <% }; %>
-                                                            <td data-i="<%=index%>">
+                                                            <td data-wid="<%=word._id%>">
                                                                 <% if (word.Kanji.length) {%>
                                                                     <%= word.Kanji[0] %>
                                                                         <% } else {%>
