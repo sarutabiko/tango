@@ -79,7 +79,6 @@ if (JSON.parse(localStorage.getItem('searchResult'))) {
 
 // Launches the search ie a post request to /search with query param
 goButton.addEventListener('click', async () => {
-    clearFlash('alertFlash');
 
     const query = document.getElementById('queryString').value;
     // console.log("query text: ", query)
@@ -87,7 +86,7 @@ goButton.addEventListener('click', async () => {
     // Dim the current results if they exist
     const searchResults = document.getElementById('definitions');
     if (searchResults)
-        searchResults.setAttribute('style', 'opacity: 0.5;');
+        blur(searchResults);
     goButton.setAttribute('style', 'background-color: cornsilk;');
 
     // fetch request to /search here
@@ -109,6 +108,6 @@ goButton.addEventListener('click', async () => {
 
     // Undim
     if (searchResults)
-        searchResults.removeAttribute('style');
+        unblur(searchResults)
     goButton.removeAttribute('style');
 });

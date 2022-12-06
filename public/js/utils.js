@@ -1,6 +1,7 @@
 // This is a javascript file for common functions I wrote (non-node modules) for use in client-side JS
 
 const immediateFlash = function (flashType, msg) {
+    clearFlash(flashType);
     const navbar = document.getElementById('header');
     navbar.insertAdjacentHTML('afterend', `<div class="${flashType}" role="alert">${msg} <button class="hide" onclick="closeButton(this)"><span>&times;</span></button></div>`);
 }
@@ -29,4 +30,13 @@ const closeButton = function (target) {
 const flashX = document.querySelectorAll(".hide");
 for (let X of flashX) {
     X.addEventListener('click', function () { this.parentElement.setAttribute('style', 'display:none') })
+}
+
+// Opacity setter ie Blur effect helper for when you're waiting for async responses and such
+const blur = function (element, opacity = 0.8) {
+    element.setAttribute('style', `opacity: ${opacity};`);
+}
+
+const unblur = function (element) {
+    element.removeAttribute('style');
 }
