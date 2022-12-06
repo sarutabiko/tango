@@ -59,13 +59,15 @@ const buttonBoxToggler = function (selectedN) {
 // Track selected words and toggle buttons accordingly
 const selectWord = function (e) {
     // console.log('event target?: ', e.target);
-    const dataI = e.target.getAttribute('data-i');
+    const dataI = e.target.getAttribute('data-wid');
     if (e.target.classList.toggle("selectedCell")) {
-        selectedCells.push(parseInt(dataI));
-        selectedCells = selectedCells.sort(sortDescend);
+        selectedCells.push(dataI);
+        // selectedCells.push(parseInt(dataI));
+        // selectedCells = selectedCells.sort(sortDescend);
     }
     else {
-        const index = selectedCells.indexOf(parseInt(dataI))
+        const index = selectedCells.indexOf(dataI);
+        // const index = selectedCells.indexOf(parseInt(dataI))
         if (index > -1) { // only splice array when item is found
             selectedCells.splice(index, 1); // 2nd parameter means remove one item only
         }
@@ -78,7 +80,7 @@ const selectWord = function (e) {
 const createListToggler = function () {
     // Show create list option only when "Create list" is selected
     const val = document.getElementById('list-select').value;
-    console.log('val is;', val)
+    // console.log('val is;', val)
     if (val === 'new') {
         document.getElementById('createList').setAttribute('style', 'display:flex;');
         document.getElementById('sendListButton').setAttribute('disabled', true);
@@ -184,7 +186,7 @@ const generateTable = async function (listID) {
         const tr = document.createElement('tr');
         for (let j = 0; j < i; j++) {
             const td = document.createElement('td');
-            td.setAttribute('data-i', c + j);
+            td.setAttribute('data-wid', getList.words[c + j]._id);
             if (getList.words[c + j].Kanji.length)
                 td.innerHTML = getList.words[c + j].Kanji[0];
             else
@@ -201,17 +203,31 @@ const generateTable = async function (listID) {
     addEventListenerSelectWord();
 }
 
+// Reset selection
+const resetSelection = function () {
+    const selectedElements = document.querySelectorAll('.selectedCell');
+
+    selectedElements.forEach((element) => {
+        element.classList.remove('selectedCell')
+    });
+
+    selectedCells = [];
+    buttonBoxToggler(0);
+
+}
+
 // Add list viewer if there are any lists available to view
 if (tableNode) {
-    listViewSelect.addEventListener('change', (e) => {
-        generateTable(e.target.value);
-        selectedCells = [];
-        buttonBoxToggler(selectedCells.length);
+    listViewSelect.addEventListener('change', async (e) => {
+        listViewSelect.setAttribute('style', 'background-color: lavender');
+        await generateTable(e.target.value);
+        resetSelection();
+        listViewSelect.removeAttribute('style');
+        // buttonBoxToggler(selectedCells.length);
     });
 }
 
 // If logged in (add button wouldn't appear otherise), add "select word" functionality to add/delete to own lists
-// and 
 if (addButton) {
     addEventListenerSelectWord();
 
@@ -227,7 +243,8 @@ if (addButton) {
 
             const listID = document.getElementById('list-viewer').value;
 
-            console.log('called delete');
+            deleteButton.setAttribute('style', 'background-color: lavender');
+
             const response = await fetch('/word', {
                 method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
                 headers: {
@@ -239,9 +256,12 @@ if (addButton) {
             }).then(r => r.json());
             console.log(response);
 
+            deleteButton.removeAttribute('style');
+
             if (response) {
-                selectedCells = [];
+                resetSelection();
                 generateTable(listID);
+                immediateFlash('successFlash', `Deleted ${response.words.length} word(s)`);
             }
             else
                 console.log(response);
@@ -250,8 +270,10 @@ if (addButton) {
     // Sends the request that actually adds the words to a given list and removes it from Unlisted.
     // Removing from unlisted is only for loggedIn.self users, for others it should just add the word to their list
     sendListButton.addEventListener('click', async () => {
-        const toListID = document.getElementById('list-select').value;
-        const fromListID = document.querySelector('#list-viewer').value
+
+        blur(sendListButton);
+        const toListID = selectDropdown.value;
+        const fromListID = listViewSelect.value;
         // console.log("SelectedCells and llistID are: ", selectedCells, listID);
 
         const response = await fetch(window.location.href, {
@@ -265,7 +287,19 @@ if (addButton) {
         }).then(r => r.json());
         // console.log(response);
 
-        location.reload(true);
+        unblur(sendListButton);
+
+        //close popup, redraw table if word is removed from unlisted, flash message
+        const currentOption = listViewSelect.options[listViewSelect.selectedIndex];
+        selectListBoxPopup();
+        if (currentOption.hasAttribute('id') && currentOption.getAttribute('id') === 'unlisted') {
+            generateTable(fromListID);
+            immediateFlash('successFlash', `${response.wordIDArray.length} word(s) moved to list`);
+        }
+        else
+            immediateFlash('successFlash', `${response.wordIDArray.length} word(s) added to list`);
+        resetSelection();
+
     })
 
     // Create List toggle event listener
