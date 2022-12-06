@@ -2,7 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const router = express.Router();
 const { User } = require("../models/user");
-const { Wordlist } = require('../models/wordSchema');
+const { Wordlist, Word } = require('../models/wordSchema');
 const mongoose = require('mongoose');
 const { promptLogin, isLoggedIn, isAuthorisedToView } = require('../middleware');
 
@@ -66,9 +66,9 @@ router.route('/user/:username')
     .post(
         isLoggedIn,
         async (req, res) => {
-            const { selectedCells: indexString, toListID, fromListID } = req.body;
-            const indexArray = indexString.split(',');
-            // console.log("indexArray is: ", indexArray)
+            const { selectedCells: wordIDString, toListID, fromListID } = req.body;
+            const wordIDArray = wordIDString.split(',');
+            // console.log("req.obdy is: ", req.body);
 
             const listToInsert = await Wordlist.findById(toListID);
             const listFrom = await Wordlist.findById(fromListID);
@@ -78,16 +78,21 @@ router.route('/user/:username')
             // console.log("listToInsert is: ", listToInsert)
             // console.log("defaultList is: ", defaultList)
 
-            indexArray.forEach(wordI => {
-                listToInsert.words.push(listFrom.words[wordI]);
-                if (moveWord)
-                    listFrom.words.splice(wordI, 1);
-            })
+            for (const wordID of wordIDArray) {
+                listToInsert.words.push(wordID);
+                const wordDB = await Word.findById(wordID);
+                wordDB.lists.push(toListID);
+                if (moveWord) {
+                    listFrom.words.splice(listFrom.words.indexOf(wordID), 1);
+                    wordDB.lists.splice(wordDB.lists.indexOf(fromListID), 1);
+                }
+                await wordDB.save();
+            }
             await listToInsert.save();
             if (moveWord)
                 await listFrom.save();
 
-            res.send({ listToInsert, listFrom });
+            res.send({ listToInsert, listFrom, wordIDArray });
         })
 
 router.route('/user/:username/lists')

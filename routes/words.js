@@ -22,37 +22,35 @@ router.route('/')
         if (!(user.lists.length)) {
             // console.log("creating defauult list")
             user.lists.push(await Wordlist.create({ name: "Unlisted", owner: user._id }))
+            await user.save();
         }
-        await user.save();
 
-        const defaultList = await Wordlist.findOne({ owner: user._id, name: 'Unlisted' });
-        defaultList.words.push(wordInDB._id);
-        defaultList.save();
+        const unlistedList = await Wordlist.findOne({ owner: user._id, name: 'Unlisted' });
+        unlistedList.words.push(wordInDB._id);
+        wordInDB.lists.push(unlistedList._id);
+        unlistedList.save();
+        wordInDB.save();
         // console.log(defaultList);
         req.flash('success', "Word added.");
         res.redirect('/search');
     })
     .delete(isLoggedIn, isOwner, async (req, res) => {
-        const { listID, selectedCells: indexString } = req.body;
-        const indexArray = indexString.split(',').map(x => parseInt(x));
-        // res.send(req.body);
-        indexArray.sort((a, b) => {
-            if (a > b)
-                return -1;
-            if (a < b)
-                return 1;
-            return 0;
-        })
-        console.log('index arr is: ', indexArray);
-        // incmplete, next step remove listref from word
-        //refs contains IDs of words that are being deleted
-        //if a word is deleted from DB (ie no refs to it), it will be saved in deleted.words[]
+        const { listID, selectedCells: wordIDString } = req.body;
+        // console.log(req.body);
+        const wordIDArray = wordIDString.split(',');
+        // return res.send(indexArray);
+
+        // console.log('index arr is: ', indexArray);
+        // also remove listref from word
+        // deleted.refs[] contains IDs of words that are being deleted
+        // if a word is deleted from DB (ie no refs to it), it will be saved in deleted.words[]
         let deleted = { listID, refs: [], words: [] };
         const getList = await Wordlist.findById(listID);
-        indexArray.forEach(async wordI => {
+
+        for (const wordID of wordIDArray) {
             // find Word in db, remove listref from it
-            const word = await Word.findById(getList.words[wordI]);
-            deleted.refs.push(word._id);
+            const word = await Word.findById(wordID);
+            deleted.refs.push(wordID);
             word.lists.splice(word.lists.indexOf(getList._id), 1);
             // if no listrefs left, delete the word 
             if (!(word.lists.length)) {
@@ -62,10 +60,14 @@ router.route('/')
             else
                 await word.save();
             // then remove wordref from list
-            getList.words.splice(wordI, 1);
-        })
+            // console.log('getList obj', getList);
+            getList.words.splice(getList.words.indexOf(wordID), 1);
+
+        };
+
+        // console.log('deleted is: ', deleted);
         getList.save();
-        res.send(deleted);
+        return res.send(deleted);
     })
 
 router.get('/add', promptLogin, (req, res) => {
