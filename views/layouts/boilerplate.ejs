@@ -22,8 +22,14 @@
     <link rel="stylesheet" href="/css/flash.css">
 
     <%- body %>
-        </body>
-        <script src="/js/utils.js"></script>
-        <script src="/js/navbar.js"></script>
+
+        <% if (!currentUser) { %>
+            <%- partial('partials/auth') %>
+                <script src="/js/auth.js"></script>
+                <% }%>
+
+                    </body>
+                    <script src="/js/utils.js"></script>
+                    <script src="/js/navbar.js"></script>
 
 </html>
