@@ -8,21 +8,23 @@ const { promptLogin, isLoggedIn, isAuthorisedToView } = require('../middleware')
 
 
 router.route('/auth')
-    .get((req, res) => {
-        if (res.locals.currentUser)
-            res.redirect(`user/${res.locals.currentUser.username}`)
-        else {
-            res.render('user/fullAuthPage', { title: "Log in" });
-        }
-    })
-    .post(passport.authenticate('local', { failureFlash: true, failureRedirect: false }), async (req, res) => {
+    // .get((req, res) => {
+    //     // if (res.locals.currentUser)
+    //     // res.redirect(`user/${res.locals.currentUser.username}`)
+    //     // else {
+    //     res.render('user/fullAuthPage', { title: "Log in" });
+    //     // }
+    // })
+    .post(passport.authenticate('local', { failureFlash: true, failureRedirect: false, failureMessage: true }), async (req, res) => {
         // req.flash('success', 'Welcome back');
         // const redirectUrl = req.session.returnTo || '/';
         // delete req.session.returnTo;
         if (req.user) {
-            req.flash('success', "Successfully logged in.");
-            res.redirect('/');
+            // req.flash('success', "Successfully logged in.");
+            res.status(200).send('Successfully logged in.');
         }
+        else
+            console.log('OHHHHNOOOO');
     });
 
 router.route('/user/:username')
