@@ -1,14 +1,16 @@
-<div id="credentials">
+<div id="credentials" class="" style="display: none;">
 
-    <%- partial('partials/flash') %>
-        <div id="authMessage" style="display: none"></div>
-        <form id="authForm" action="/auth" method="POST">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" required />
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required />
-            <br>
-            <button class="submitButton">Log in</button>
-        </form>
-        <div id="prompt"><a>New User? Register here</a></div>
+    <div id="authMessage" style="display: none;"></div>
+    <div class="prompt hide" style="margin: 0; margin-bottom: 0.5rem; text-align: end;">
+        Close [X]
+    </div>
+    <form id="authForm" action="/auth" method="POST">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required />
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+        <br>
+        <button class="submitButton">Log in</button>
+    </form>
+    <div class="prompt"><a>New User? Register here</a></div>
 </div>

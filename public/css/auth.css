@@ -44,14 +44,3 @@
     background-color: cornsilk;
     word-wrap: break-word;
 }
-
-#prompt {
-    margin: 2rem;
-    font-weight: bold;
-    color: red;
-    text-decoration: underline red;
-}
-
-#prompt a:hover {
-    color: maroon;
-}

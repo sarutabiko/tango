@@ -148,5 +148,16 @@ select:hover {
 }
 
 i {
+    color: crimson;
+}
+
+.prompt {
+    margin: 2rem;
+    font-weight: bold;
     color: red;
+    text-decoration: underline red;
+}
+
+.prompt:hover {
+    color: maroon;
 }
