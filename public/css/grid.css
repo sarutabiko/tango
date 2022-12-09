@@ -1,0 +1,51 @@
+div.box {
+    height: 60px;
+    width: 60px;
+    border: 2px solid lightgray;
+    background-color: white;
+    margin: 2px;
+    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div.row {
+    display: flex;
+    justify-content: center;
+}
+
+div.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+div.grid div.box.filled {
+    background-color: peru;
+}
+
+div.box.locked {
+    background-color: lightgray;
+}
+
+.currentRow>.empty {
+    background-color: beige;
+}
+
+.currentRow>.empty~.empty {
+    background-color: white;
+}
+
+
+#main {
+    display: flex;
+    justify-content: center;
+}
+
+div#main>div {
+    width: 400px;
+    max-height: 400px;
+    margin: 0.5rem;
+}
