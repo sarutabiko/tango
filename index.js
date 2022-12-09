@@ -28,8 +28,8 @@ const { isLoggedIn } = require('./middleware');
 const { Wordlist } = require('./models/wordSchema');
 
 // mongo connection
-// const dbURL = process.env.DB_URL;
-const dbURL = 'mongodb://127.0.0.1:27017/tango'
+const dbURL = process.env.DB_URL;
+// const dbURL = 'mongodb://127.0.0.1:27017/tango'
 main()
     .then(() => {
         console.log("Database Connection Successful!!!");
