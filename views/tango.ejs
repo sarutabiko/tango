@@ -1,0 +1,19 @@
+<% layout('layouts/boilerplate') %>
+
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/flash.css">
+    <link rel="stylesheet" href="/css/grid.css">
+    </head>
+
+    <body>
+        <%- partial('partials/navbar') %>
+            <%- partial('partials/flash') %>
+                <div id="main">
+                    <div id="grid">
+                    </div>
+                </div>
+
+                <input class="input" id="ime" autofocus />
+
+                <script src="/js/tangoReady.js"> </script>

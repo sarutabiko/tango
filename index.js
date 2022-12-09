@@ -28,8 +28,8 @@ const { isLoggedIn } = require('./middleware');
 const { Wordlist } = require('./models/wordSchema');
 
 // mongo connection
-const dbURL = process.env.DB_URL;
-// const dbURL = 'mongodb://127.0.0.1:27017/tango'
+// const dbURL = process.env.DB_URL;
+const dbURL = 'mongodb://127.0.0.1:27017/tango'
 main()
     .then(() => {
         console.log("Database Connection Successful!!!");
@@ -101,7 +101,12 @@ app.use((req, res, next) => {
 
 app.get('/', async (req, res) => {
     const publicList = await Wordlist.findOne({ public: true }).populate('words').populate('owner');
+    // console.log('publicList', publicList);
     res.render('index', { title: "単語", publicList });
+})
+
+app.get('/wordle', async (req, res) => {
+    res.render('tango', { title: "Nihon-dle" });
 })
 
 app.use('/', userRoutes);
