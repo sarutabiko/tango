@@ -8,7 +8,7 @@ const createListButton = document.getElementById('createListButton');
 const listViewSelect = document.getElementById('list-viewer');
 
 // stores if there's a popup currently
-let popup = false;
+let selectListPopup = false;
 
 let selectedCells = [];
 
@@ -135,7 +135,7 @@ const selectListBoxPopup = function () {
     const disableCurrent = document.querySelector(`#list-select option[value='${listViewSelect.value}']`);
     sendButtonToggler();
 
-    if (!popup) {
+    if (!selectListPopup) {
         // Disable current list
         disableCurrent.setAttribute('disabled', true);
 
@@ -150,7 +150,7 @@ const selectListBoxPopup = function () {
         selectListBox.setAttribute('style', 'display: none;');
         disableCurrent.removeAttribute('disabled');
     }
-    popup = !popup;
+    selectListPopup = !selectListPopup;
 }
 
 // Will add click events to words to select them, also called by table generator
