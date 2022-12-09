@@ -1,6 +1,6 @@
 const loginForm = document.querySelector("#authForm");
 
-const switchAuth = document.querySelector("#prompt a");
+// const switchAuth = document.querySelector("#prompt a");
 const switchFunc = function () {
     let formNode = document.querySelector("#credentials form button");
 
@@ -43,7 +43,7 @@ const switchFunc = function () {
     }
 }
 
-switchAuth.addEventListener('click', switchFunc)
+// switchAuth.addEventListener('click', switchFunc);
 
 function urlencodeFormData(fd) {
     var s = '';
@@ -56,32 +56,34 @@ function urlencodeFormData(fd) {
     return s;
 }
 
-loginForm.addEventListener('submit', async function (event) {
-    event.preventDefault();
-    const form = event.currentTarget;
+const formSubmit = async function (e) {
+    e.preventDefault();
+    const form = e.currentTarget;
     const url = form.action;
+    // try {
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+            Accept: "*/*",
+        },
+        body: urlencodeFormData(new FormData(form)),
+    };
+    const response = await fetch(url, fetchOptions);
+    console.log(response);
 
-    try {
-        const fetchOptions = {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-                Accept: "*/*",
-            },
-            body: urlencodeFormData(new FormData(form)),
-        };
-
-        const response = await fetch(url, fetchOptions);
-        console.log(response);
-
+    if (response.status == 200) {
+        popup('credentials');
         window.location.reload();
     }
-    catch (error) {
-        console.log(error);
-        window.location.reload();
+    else {
+        const authMsg = document.getElementById('authMessage');
+        authMsg.innerText = response.statusText;
+        popup('authMessage');
     }
+}
 
-});
+loginForm.addEventListener('submit', formSubmit, true);
 
 function checkCookieHasASpecificValue() {
     if (document.cookie.split(';').some((item) => item.includes('auth=register'))) {
