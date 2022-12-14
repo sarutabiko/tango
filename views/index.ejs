@@ -12,6 +12,8 @@
                     <div id="wordlist">
                         <ul>
                             <% if (publicList && publicList.words.length) {%>
+                                <li> A list of random words: </li>
+                                <hr>
                                 <a href="/user/<%=publicList.owner.username%>">
                                     <% for (word of publicList.words) {%>
                                         <li>
@@ -29,6 +31,7 @@
                                     <%} %>
                         </ul>
                     </div>
-                    <div id="grid">
+                    <div id="right">
+                        <a class="submitButton" href="/wordle">Play Japanese Wordle</a>
                     </div>
                 </div>
