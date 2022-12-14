@@ -161,3 +161,29 @@ i {
 .prompt:hover {
     color: maroon;
 }
+
+.popup {
+    box-shadow: 0px 0px 1px 5000px rgba(0, 0, 0, 0.4);
+
+    background-color: white;
+    display: block;
+    z-index: 9;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+
+    font-size: large;
+    align-items: center;
+    text-align: center;
+    border: 4px double red;
+    padding: 1rem 2rem 1rem 2rem;
+}
