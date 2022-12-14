@@ -39,12 +39,14 @@ const draw = async (searchResult) => {
         if (i.kanji.length) {
             i.kanji.forEach(x => {
                 pre.innerText += x.join(', ');
+                pre.innerText += ', ';
             });
             pre.innerText += "\n";
         }
 
         i.reading.forEach(x => {
             pre.innerText += x.join(', ');
+            pre.innerText += ', ';
         });
 
         pre.innerText += "\n";
