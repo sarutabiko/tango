@@ -27,7 +27,8 @@ div.grid div.box.filled {
 }
 
 div.box.locked {
-    background-color: lightgray;
+    background-color: gray;
+    color: white;
 }
 
 .currentRow>.empty {
@@ -41,6 +42,7 @@ div.box.locked {
 
 #main {
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
@@ -48,4 +50,14 @@ div#main>div {
     width: 400px;
     max-height: 400px;
     margin: 0.5rem;
+}
+
+div.box.Yellow {
+    background-color: #d2bc58;
+    color: white;
+}
+
+div.box.Green {
+    background-color: #6aaa64;
+    color: white;
 }

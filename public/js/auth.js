@@ -21,6 +21,7 @@ const switchFunc = function () {
         emailInput.setAttribute('type', 'email');
         emailInput.setAttribute('id', 'email');
         emailInput.setAttribute('name', 'email');
+        emailInput.setAttribute('autofocus', 'true');
         formNode.prepend(emailInput);
         formNode.prepend(emailLabel);
 

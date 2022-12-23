@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="/css/flash.css">
     <link rel="stylesheet" href="/css/profile.css">
     <link rel="stylesheet" href="/css/listSelect.css">
+    <link rel="stylesheet" href="/css/wordBox.css">
     </head>
 
     <body>
@@ -30,13 +31,11 @@
                                 <% }%>
 
                         </div>
-                        <% if (getLists.length) {%>
 
+                        <% if (loggedIn && loggedIn.self) {%>
                             <div id="wordBox">
-                                List Selector ここで
-                                <br>
 
-                                <button class="submitButton"> Edit Lists</button>
+                                <button class="submitButton" id="editListButton"> Edit Lists</button>
                             </div>
                             <% } %>
                     </div>
@@ -90,30 +89,24 @@
                             <% } %>
                                 <% if (loggedIn && getLists.length) {%>
                                     <div id="buttonBox">
-                                        <button class="submitButton" id="addToListButton" disabled>Add to List</button>
+                                        <button class="submitButton" id="addToListButton"
+                                            onclick="popup('selectListBox')" disabled>Add to List</button>
                                         <% if (loggedIn.self) {%>
                                             <button class="submitButton" id="deleteButton" disabled>Delete</button>
                                             <% } %>
                                     </div>
                                     <% } %>
                                         <% if (getLists.length) {%>
-                                            <div id="listBox">
-                                                Word Preview/Word of the day?
-                                                <hr>
-                                                <span style="border-right: solid black 2px; padding: 0 4px;"> Kanji
-                                                </span>
-                                                <span style="border-right: solid black 2px; padding: 0 4px;"> Reading
-                                                </span>
-                                                <span style="border-right: solid black 2px; padding: 0 4px;"> Meaning
-                                                </span>
-                                            </div>
-                                            <% } %>
+                                            <%- partial('partials/wordBox') %>
+                                                <% } %>
                     </div>
 
                 </div>
 
                 <%if (loggedIn) {%>
                     <%- partial('partials/listSelectBox') %>
-                        <% } %>
+                        <% if (loggedIn.self) {%>
+                            <%- partial('partials/listEditBox') %>
+                                <% }} %>
 
-                            <script src="/js/profile.js"></script>
+                                    <script src="/js/profile.js"></script>

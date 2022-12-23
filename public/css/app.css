@@ -5,6 +5,7 @@
     font-size: 150%;
     overflow-y: scroll;
     font-size: xx-large;
+    max-height: 80vh;
 }
 
 #wordlist>ul {
@@ -28,7 +29,7 @@
 #wordlist>ul hr {
     margin: 0 0;
     border: none;
-    border-top: 3px solid black;
+    border-top: 0.2rem solid black;
     overflow: visible;
 }
 
@@ -36,6 +37,65 @@ a,
 a:visited {
     color: inherit;
     text-decoration: none;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#main #right {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+/* div#main>div {
+    width: 400px;
+    max-height: 400px;
+    margin: 0.5rem;
+} */
+
+#haiku {
+    font-family: 'YujiSyuku', san-serif;
+
+    flex-grow: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0.5rem;
+    align-items: stretch;
+    font-size: xx-large;
+    border-bottom: double maroon 0.2rem;
+}
+
+
+.haikuBoxUnit {
+    padding: 2rem;
+    border-right: double maroon 0.2rem;
+    text-align: center;
+}
+
+#haikuBoxMeaning {
+    font-family: 'MarckScript';
+    font-weight: lighter;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: none;
+}
+
+.traditional-vertical-writing {
+    writing-mode: vertical-rl;
+    text-align: center;
+    line-height: 2;
+    /* font-size: x-large; */
+    /* font-weight: 100; */
 }
 
 @media (max-width: 700px) {

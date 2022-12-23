@@ -4,3 +4,31 @@
     font-display: swap;
     src: url('../fonts/NotoSerifJP-Regular.otf') format('opentype');
 }
+
+@font-face {
+    font-family: 'Noto Serif JP';
+    font-style: normal;
+    font-display: swap;
+    src: url('../fonts/NotoSerifJP-Light.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Noto Serif JP';
+    font-style: normal;
+    font-display: swap;
+    src: url('../fonts/NotoSerifJP-ExtraLight.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'YujiSyuku';
+    font-style: normal;
+    font-display: swap;
+    src: url('../fonts/YujiSyuku-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'MarckScript';
+    font-style: normal;
+    font-display: swap;
+    src: url('../fonts/MarckScript-Regular.ttf') format('truetype');
+}

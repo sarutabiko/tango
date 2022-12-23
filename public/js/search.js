@@ -42,11 +42,13 @@ const draw = async (searchResult) => {
                 pre.innerText += ', ';
             });
             pre.innerText += "\n";
+            pre.innerText = pre.innerText.slice(0, pre.innerText.length - 1);
         }
 
         i.reading.forEach(x => {
             pre.innerText += x.join(', ');
             pre.innerText += ', ';
+            pre.innerText = pre.innerText.slice(0, pre.innerText.length - 1);
         });
 
         pre.innerText += "\n";
@@ -82,7 +84,7 @@ if (JSON.parse(localStorage.getItem('searchResult'))) {
 // Launches the search ie a post request to /search with query param
 goButton.addEventListener('click', async () => {
 
-    const query = document.getElementById('queryString').value;
+    const query = document.getElementById('queryString').value.toLowerCase();
     // console.log("query text: ", query)
 
     // Dim the current results if they exist

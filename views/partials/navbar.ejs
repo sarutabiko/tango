@@ -22,7 +22,7 @@
                             </h1>
                             <div class="menu-content">
                                 <% if (currentUser) { %>
-                                    <a class="links-hidden" href="/auth">Profile</a>
+                                    <a class="links-hidden" href="/user/<%=currentUser.username%>">Profile</a>
                                     <br>
                                     <a class="links-hidden" href="/logout">Log Out</a>
                                     <% } else {%>
