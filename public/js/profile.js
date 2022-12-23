@@ -1,25 +1,28 @@
 const tableNode = document.querySelector('#right table');
 const addButton = document.querySelector('#addToListButton');
 const deleteButton = document.querySelector('#deleteButton');
+const editListButton = document.querySelector('#editListButton');
+const editListBox = document.querySelector('#editListBox');
+const editButton = document.querySelector('#editButton');
 const selectListBox = document.getElementById('selectListBox');
 const sendListButton = document.getElementById('sendListButton');
 const selectDropdown = document.getElementById('list-select');
 const createListButton = document.getElementById('createListButton');
 const listViewSelect = document.getElementById('list-viewer');
-
-// stores if there's a popup currently
-let selectListPopup = false;
+let oldListViewSelectVal = document.getElementById('list-viewer').value;
 
 let selectedCells = [];
 
-const handler = function (e) {
-    if (selectListBox.contains(e.target))
-        return;
-    else if (popup) {
-        e.stopPropagation();
-        e.preventDefault();
-        selectListBoxPopup();
-        document.removeEventListener('click', handler, true);
+const handler = function (popupState, popupBox, popupFunc) {
+    return function (e) {
+        if (popupBox.contains(e.target))
+            return;
+        else if (popupState) {
+            e.stopPropagation();
+            e.preventDefault();
+            popupFunc();
+            document.removeEventListener('click', handler, true);
+        }
     }
 }
 
@@ -130,29 +133,6 @@ const createList = async function () {
 
 }
 
-// Will popup/down the selectList box and add click handler
-const selectListBoxPopup = function () {
-    const disableCurrent = document.querySelector(`#list-select option[value='${listViewSelect.value}']`);
-    sendButtonToggler();
-
-    if (!selectListPopup) {
-        // Disable current list
-        disableCurrent.setAttribute('disabled', true);
-
-        selectListBox.setAttribute('style', 'display: block;');
-        //true argument in addEventListener would ensure that the handler is executed on the event capturing phase
-        //i.e a click on any element would first be captured on the document and the listener for document's click event would
-        //be executed first before listener for any other element. The trick here is to stop the event from further propagation to the elements
-        //below thus ending the dispatch process to make sure that the event doesn't reach the target.
-        document.addEventListener('click', handler, true);
-    }
-    else {
-        selectListBox.setAttribute('style', 'display: none;');
-        disableCurrent.removeAttribute('disabled');
-    }
-    selectListPopup = !selectListPopup;
-}
-
 // Will add click events to words to select them, also called by table generator
 const addEventListenerSelectWord = function () {
     const tableCells = document.querySelectorAll('#right table tbody tr td');
@@ -219,6 +199,12 @@ const resetSelection = function () {
 // Add list viewer if there are any lists available to view
 if (tableNode) {
     listViewSelect.addEventListener('change', async (e) => {
+        //re enable old list option
+        const reEnableOld = document.querySelector(`#list-select option[value='${oldListViewSelectVal}']`);
+        reEnableOld.removeAttribute('disabled');
+        oldListViewSelectVal = document.getElementById('list-viewer').value;
+
+        // wait for new data
         listViewSelect.setAttribute('style', 'background-color: lavender');
         await generateTable(e.target.value);
         resetSelection();
@@ -234,9 +220,13 @@ if (addButton) {
     addButton.addEventListener('click', () => {
         // send request with body containing index of these selected words and id of the wordlist
         createListToggler();
-        selectListBoxPopup();
+        // disable current listview
+        const disableCurrent = document.querySelector(`#list-select option[value='${listViewSelect.value}']`);
+        disableCurrent.setAttribute('disabled', 'true')
+        sendButtonToggler();
     })
 
+    // deleteButton will only appear on self's profile page
     if (deleteButton) {
         // send request with body containing index of the list the word(s) are in, selected words and id of the wordlist
         deleteButton.addEventListener('click', async () => {
@@ -277,7 +267,7 @@ if (addButton) {
         // console.log("SelectedCells and llistID are: ", selectedCells, listID);
 
         const response = await fetch(window.location.href, {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },

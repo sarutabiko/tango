@@ -154,28 +154,33 @@ const specialChars = {
 
 const checkWord = function (word) {
     console.log("Answer is: ", answer);
-    const result = [];
+    let answerMarked = [...answer].map(x => false);
+    const result = Array(word.length);
     let correct = 0;
     let win = false;
+
+    // first check for green
     for (let i = 0; i < word.length; i++) {
         // console.log("Answer[i]: ", answer[i]);
         // console.log("Word[i]: ", word[i]);
-        if (word[i] === answer[i] || specialChars[word[i]] === answer[i]) {
-            result.push('Green');
+        if ((word[i] === answer[i] || specialChars[word[i]] === answer[i]) && !answerMarked[i]) {
+            result[i] = 'Green';
+            answerMarked[i] = true;
             correct++;
             continue;
         }
-        else if (Object.keys(specialChars).includes(word[i]) && answer[i] === specialChars[word[i]]) {
-            result.push('Green');
-            correct++;
-            continue;
-        }
-        else if (answerArray.includes(word[i]) || answerArray.includes(specialChars[word[i]])) {
-            result.push('Yellow');
+    }
+    // then for yellow
+    for (let i = 0; i < word.length; i++) {
+        let found = answerArray.indexOf(word[i]);
+        found === -1 ? found = answerArray.indexOf(specialChars[word[i]]) : {};
+        if ((found !== -1) && !answerMarked[found]) {
+            result[i] = 'Yellow';
+            answerMarked[i] = true;
             continue;
         }
         else {
-            result.push('No')
+            result[i] ? {} : result[i] = 'No';
             continue;
         }
     }
