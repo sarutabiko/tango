@@ -22,7 +22,6 @@
     <link rel="stylesheet" href="/css/flash.css">
 
     <%- body %>
-        <script src="/js/utils.js"></script>
 
         <% if (!currentUser) { %>
             <%- partial('partials/auth') %>
@@ -30,6 +29,7 @@
                 <% }%>
 
                     </body>
+                    <script src="/js/utils.js"></script>
                     <script src="/js/navbar.js"></script>
 
 </html>
