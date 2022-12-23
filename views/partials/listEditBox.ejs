@@ -1,0 +1,18 @@
+<div id="editListBox" class="popup" style="display: none;">
+
+    <%- partial('partials/flash') %>
+        <div class="prompt" style="margin: 0; margin-bottom: 0.5rem; text-align: end;" onclick="popup('editListBox')">
+            Close [X]
+        </div>
+        <div id="chooseList">
+            <label for="list-select">Choose List:</label>
+            <select name="list-select">
+                <% loggedIn.lists.forEach(listref=> {%>
+                    <option value="<%=listref._id%>" name="listID">
+                        <%=listref.name %>
+                    </option>
+                    <%}) %>
+            </select>
+            <button class="submitButton" id="editButton">Edit</button>
+        </div>
+</div>
