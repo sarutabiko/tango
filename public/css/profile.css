@@ -27,7 +27,7 @@
 table {
     margin: 4px;
     text-align: center;
-    border: double 4px red;
+    border: double 0.2rem red;
     padding: 4px;
     border-collapse: collapse;
 }
@@ -56,12 +56,12 @@ th {
     /* align-items: center; */
     /* justify-content: space-between; */
     /* border: double 2px red; */
-    padding: 0;
+    padding: 4px;
     background-color: rgb(255, 255, 255);
 }
 
 td {
-    border: double 2px red;
+    border: double 0.1rem red;
     padding: 10px 20px;
     border-spacing: 0ch;
     font-size: x-large;

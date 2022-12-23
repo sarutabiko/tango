@@ -23,7 +23,7 @@ body {
     display: flex;
     position: relative;
     justify-content: flex-end;
-    border-bottom: red 4px double;
+    border-bottom: red 0.2rem double;
     margin-bottom: 4px;
     font-weight: 400;
 }
@@ -47,8 +47,8 @@ body {
 #header a h1#search,
 #header a h1#profile {
     box-sizing: border-box;
-    border: red 4px double;
-    margin: 2px;
+    border: red 0.2rem double;
+    margin: 0.1rem;
     padding: 0.8rem 1rem 1.2rem 1rem;
     font-size: 150%;
 }
@@ -75,7 +75,7 @@ a:visited {
     right: 2px;
     min-width: 60px;
     padding: 2px;
-    border: 4px double red;
+    border: 0.2rem double red;
     z-index: 1;
 }
 
@@ -126,16 +126,16 @@ a:visited {
 }
 
 select {
-    margin: 4px auto;
+    margin: 0.2rem auto;
     text-align-last: center;
     padding: 0.5rem 1rem;
     /* width: 200px; */
     background-color: white;
     color: red;
-    border-top: 4px red;
-    border-bottom: 4px red;
-    border-right: 1px solid red;
-    border-left: 1px solid red;
+    border-top: 0.2rem red;
+    border-bottom: 0.2rem red;
+    border-right: 0.1rem solid red;
+    border-left: 0.1rem solid red;
     border-style: double solid double solid;
     /* text-decoration: underline; */
     font: inherit;
@@ -184,6 +184,6 @@ i {
     font-size: large;
     align-items: center;
     text-align: center;
-    border: 4px double red;
+    border: 0.2rem double red;
     padding: 1rem 2rem 1rem 2rem;
 }

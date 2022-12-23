@@ -11,7 +11,7 @@
 #searchBar {
     display: flex;
     border: solid red;
-    margin: 4px;
+    margin: 0.2rem;
     width: 60%;
     align-items: center;
     justify-content: center;
@@ -32,7 +32,7 @@
     margin-left: auto;
     padding: 2px;
     font-size: 150%;
-    border: solid red;
+    border: solid red 0.1rem;
     color: red;
     background-color: white;
 }
@@ -44,7 +44,7 @@
 
 #definitions {
     min-height: 0;
-    border: solid salmon;
+    border: solid salmon 0.1rem;
     width: 60%;
     overflow-y: auto;
     margin: 4px;
@@ -66,14 +66,13 @@
 
 .Unit .wordunit {
     flex-grow: 8;
-    overflow: scroll;
     font-size: 150%;
 }
 
 .Unit .plus {
     box-sizing: border-box;
     padding: 0 1rem;
-    border: red solid;
+    border: red solid 0.1rem;
     font-size: 300%;
     margin: 4px;
     flex-grow: 0;
