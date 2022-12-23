@@ -1,0 +1,9 @@
+#wordBox {
+    display: flex;
+}
+
+.wordBoxUnit {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border: maroon solid;
+}
