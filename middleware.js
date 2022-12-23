@@ -39,7 +39,7 @@ module.exports.isAuthorisedToView = async (req, res, next) => {
 }
 
 module.exports.isOwner = async (req, res, next) => {
-    console.log('in isOwner: ', req.body);
+    // console.log('in isOwner: ', req.body);
     const { listID } = req.body;
     try {
         const wordlist = await Wordlist.findById(listID);

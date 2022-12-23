@@ -1,6 +1,6 @@
 const loginForm = document.querySelector("#authForm");
 
-// const switchAuth = document.querySelector("#prompt a");
+const switchAuth = document.querySelector("#prompt a");
 const switchFunc = function () {
     let formNode = document.querySelector("#credentials form button");
 
@@ -44,7 +44,7 @@ const switchFunc = function () {
     }
 }
 
-// switchAuth.addEventListener('click', switchFunc);
+switchAuth.addEventListener('click', switchFunc);
 
 function urlencodeFormData(fd) {
     var s = '';

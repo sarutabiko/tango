@@ -46,8 +46,6 @@ wordlist.virtual('length').get(function () {
 })
 
 wordlist.post('save', async function (doc) {
-    console.log("ownder id is: ", doc.owner._id);
-
     const getOwner = await User.findById(doc.owner._id).populate('lists');
     let wordN = 0;
     for (const list of getOwner.lists)
