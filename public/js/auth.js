@@ -1,7 +1,8 @@
 const loginForm = document.querySelector("#authForm");
 
-const switchAuth = document.querySelector("#prompt a");
+const switchAuth = document.querySelector(".prompt a");
 const switchFunc = function () {
+    console.log("fired!");
     let formNode = document.querySelector("#credentials form button");
 
     if (formNode.innerText == "Log in") {
