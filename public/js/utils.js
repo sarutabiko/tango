@@ -42,6 +42,13 @@ const unblur = function (element) {
     element.removeAttribute('style');
 }
 
+const disableSet = function (element) {
+    element.setAttribute('disabled', true);
+}
+const disableUnset = function (element) {
+    element.removeAttribute('disabled');
+}
+
 // popup (style display to none/block)
 const popup = function (ID) {
     const ele = document.getElementById(ID);

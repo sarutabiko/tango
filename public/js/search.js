@@ -41,16 +41,15 @@ const draw = async (searchResult) => {
                 pre.innerText += x.join(', ');
                 pre.innerText += ', ';
             });
-            pre.innerText += "\n";
             pre.innerText = pre.innerText.slice(0, pre.innerText.length - 1);
+            pre.innerText += "\n";
         }
 
         i.reading.forEach(x => {
             pre.innerText += x.join(', ');
             pre.innerText += ', ';
-            pre.innerText = pre.innerText.slice(0, pre.innerText.length - 1);
         });
-
+        pre.innerText = pre.innerText.slice(0, pre.innerText.length - 1);
         pre.innerText += "\n";
 
         i.meaning.forEach(x => {

@@ -60,6 +60,9 @@ function urlencodeFormData(fd) {
 
 const formSubmit = async function (e) {
     e.preventDefault();
+
+    const button = document.querySelector('form .submitButton');
+    disableSet(button);
     const form = e.currentTarget;
     const url = form.action;
     // try {
@@ -73,6 +76,7 @@ const formSubmit = async function (e) {
     };
     const response = await fetch(url, fetchOptions);
     console.log(response);
+    disableUnset(button);
 
     if (response.status == 200) {
         popup('credentials');

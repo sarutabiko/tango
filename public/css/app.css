@@ -59,6 +59,12 @@ a:visited {
     max-height: 400px;
     margin: 0.5rem;
 } */
+hr {
+    border: 0.4rem double darkred;
+    border-bottom: none;
+    border-top: none;
+    color: white;
+}
 
 #haiku {
     font-family: 'YujiSyuku', san-serif;
@@ -77,7 +83,7 @@ a:visited {
 
 .haikuBoxUnit {
     padding: 2rem;
-    border-right: double maroon 0.2rem;
+    /* border-right: double maroon 0.2rem; */
     text-align: center;
 }
 
