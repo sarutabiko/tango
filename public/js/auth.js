@@ -26,7 +26,7 @@ const switchFunc = function () {
         formNode.prepend(emailInput);
         formNode.prepend(emailLabel);
 
-        document.querySelector("#credentials #prompt a").innerText = "Or Log in here";
+        document.querySelector("#credentials .prompt a").innerText = "Or Log in here";
     }
     else {
 

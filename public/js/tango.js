@@ -1,5 +1,3 @@
-const wanakana = require('wanakana');
-
 var inputBox = document.getElementById('ime');
 wanakana.bind(inputBox);
 
