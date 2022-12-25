@@ -2,7 +2,6 @@ const loginForm = document.querySelector("#authForm");
 
 const switchAuth = document.querySelector(".prompt a");
 const switchFunc = function () {
-    console.log("fired!");
     let formNode = document.querySelector("#credentials form button");
 
     if (formNode.innerText == "Log in") {
@@ -31,7 +30,7 @@ const switchFunc = function () {
     else {
 
         document.cookie = 'auth=login;sameSite=strict';
-        console.log(document.cookie);
+        // console.log(document.cookie);
 
         formNode.innerText = "Log in";
         formNode.parentElement.setAttribute('action', '/auth')
@@ -75,7 +74,7 @@ const formSubmit = async function (e) {
         body: urlencodeFormData(new FormData(form)),
     };
     const response = await fetch(url, fetchOptions);
-    console.log(response);
+    // console.log(response);
     disableUnset(button);
 
     if (response.status == 200) {
