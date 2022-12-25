@@ -33,7 +33,7 @@ generateRows(wordSize, tries);
 // funciton that enters kana chars into divs
 const insertKana = function (kana) {
 
-    console.log('kana is ', kana);
+    // console.log('kana is ', kana);
     for (let i = 0; i < kana.length; i++) {
         const ele = document.querySelector('.currentRow .empty');
 
@@ -73,7 +73,7 @@ inputBox.addEventListener('keyup', (e) => {
                     letterCount--;
                 }
                 str = str.slice(0, str.length - 1);
-                console.log("string: ", str);
+                // console.log("string: ", str);
                 return;
             }
             else
@@ -149,9 +149,13 @@ const specialChars = {
     'ゅ': 'ゆ',
     'ょ': 'よ',
 };
-
+const updateChart = function (word, result) {
+    for (let i = 0; i < word.length; i++) {
+        document.getElementById(`${word[i]}-key`).setAttribute('data-color', `${result[i]}`);
+    }
+}
 const checkWord = function (word) {
-    console.log("Answer is: ", answer);
+    // console.log("Answer is: ", answer);
     let answerMarked = [...answer].map(x => false);
     const result = Array(word.length);
     let correct = 0;
@@ -184,5 +188,29 @@ const checkWord = function (word) {
     }
     if (correct === wordSize)
         win = true;
+
+    updateChart(word, result);
     return { result, win };
 }
+
+const eventAssigner = function () {
+    const keys = document.querySelectorAll("td[id$='-key']");
+
+    keys.forEach(ele => ele.addEventListener('click', () => {
+        const inputBox = document.getElementById('ime');
+        inputBox.value = ele.innerText;
+        inputBox.dispatchEvent(new Event("keyup"), { bubbles: true });
+    }))
+
+    document.getElementById('Enter').addEventListener('click', () => {
+        const event = new KeyboardEvent('keyup', { 'key': 'Enter' });
+        inputBox.dispatchEvent(event)
+    })
+
+    document.getElementById('Delete').addEventListener('click', () => {
+        const event = new KeyboardEvent('keyup', { 'key': 'Backspace' });
+        inputBox.dispatchEvent(event)
+    })
+}
+
+eventAssigner();

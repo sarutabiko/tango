@@ -21,9 +21,8 @@
     border-collapse: collapse;
     border-spacing: 0;
     text-align: center;
+    font-size: x-large;
 }
-
-
 
 .rtable th {
     font-size: 11px;
@@ -56,4 +55,48 @@ tr:nth-child(even) td:nth-child(even) {
 
 td.dud {
     background-color: white !important;
+}
+
+td.Green,
+td[data-color="Green"] {
+    background-color: #6aaa64 !important;
+    color: white !important;
+}
+
+td.Yellow,
+td[data-color="Yellow"] {
+    background-color: #d2bc58 !important;
+    color: white !important;
+}
+
+td.No,
+td[data-color="No"] {
+    background-color: gray !important;
+    color: white !important;
+}
+
+tr.specialRow td:nth-child(odd) {
+    background-color: #D0B49F;
+}
+
+tr.specialRow td:nth-child(even) {
+    border-left: none;
+    background-color: #E4D4C8;
+}
+
+.fade-text {
+    opacity: 0.4;
+}
+
+.specialKey {
+    background-color: white !important;
+    color: red;
+}
+
+.pair {
+    background-color: rgb(255, 226, 171) !important;
+}
+
+.specialChar {
+    background-color: rgb(255, 244, 223) !important;
 }
