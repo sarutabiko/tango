@@ -58,13 +58,13 @@ td.dud {
 }
 
 td.Green,
-td[data-color="Green"] {
+td[data-color="Green"],
+td[data-color="Yellow"] {
     background-color: #6aaa64 !important;
     color: white !important;
 }
 
-td.Yellow,
-td[data-color="Yellow"] {
+td.Yellow {
     background-color: #d2bc58 !important;
     color: white !important;
 }

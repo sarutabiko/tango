@@ -1,6 +1,6 @@
 const loginForm = document.querySelector("#authForm");
 
-const switchAuth = document.querySelector(".prompt a");
+const switchAuth = document.getElementById("switch");
 const switchFunc = function () {
     let formNode = document.querySelector("#credentials form button");
 
@@ -25,7 +25,7 @@ const switchFunc = function () {
         formNode.prepend(emailInput);
         formNode.prepend(emailLabel);
 
-        document.querySelector("#credentials .prompt a").innerText = "Or Log in here";
+        switchAuth.innerText = "Or Log in here";
     }
     else {
 
@@ -40,7 +40,7 @@ const switchFunc = function () {
         formNode = document.querySelector("#credentials form input");
         formNode.parentNode.removeChild(formNode);
 
-        document.querySelector("#credentials #prompt a").innerText = "New User? Register here";
+        document.querySelector("#credentials .prompt a").innerText = "New User? Register here";
     }
 }
 

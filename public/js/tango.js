@@ -48,11 +48,22 @@ const insertKana = function (kana) {
 
 //
 const gameOver = function (result) {
+    const rows = document.querySelectorAll('.row');
+    let score = 0;
+    for (let i = 0; i < rows.length; i++) {
+        if (rows[i].classList.contains('currentRow'))
+            break;
+        else
+            score++;
+    }
+
+    document.getElementById('score').innerText += `${score + 1}/6`;
     popup('gameFinish');
     isGameOver = true;
     inputBox.setAttribute('disabled', true);
 
     const retryButton = document.createElement('a');
+    retryButton.setAttribute('href', '/wordle');
     retryButton.innerText = "New Game";
     retryButton.classList.add('submitButton');
     // retryButton.setAttribute('href','/wordle');
@@ -88,7 +99,8 @@ inputBox.addEventListener('keyup', (e) => {
                 const row = document.querySelector(".currentRow");
                 [...row.children].forEach((element, index) => {
                     element.classList.replace('filled', 'locked');
-                    element.classList.add(result.result[index]);
+                    result.result[index].split(" ").forEach(x => element.classList.add(x))
+                    // element.classList.add(result.result[index]);
                 });
 
                 currentRow++;
@@ -136,7 +148,7 @@ inputBox.addEventListener('keyup', (e) => {
 })
 
 // wordle functionality
-let answer = "おにいさん";
+let answer = "しゅくだい";
 let answerArray = [...answer];
 
 const specialChars = {
@@ -166,6 +178,11 @@ const checkWord = function (word) {
         // console.log("Answer[i]: ", answer[i]);
         // console.log("Word[i]: ", word[i]);
         if ((word[i] === answer[i] || specialChars[word[i]] === answer[i]) && !answerMarked[i]) {
+            if (specialChars[word[i]] === answer[i]) {
+                result[i] += "AltForm";
+                answerMarked[i] = false;
+                continue;
+            }
             result[i] = 'Green';
             answerMarked[i] = true;
             correct++;
@@ -175,13 +192,16 @@ const checkWord = function (word) {
     // then for yellow
     for (let i = 0; i < word.length; i++) {
         let found = answerArray.indexOf(word[i]);
-        found === -1 ? found = answerArray.indexOf(specialChars[word[i]]) : {};
         if ((found !== -1) && !answerMarked[found]) {
             result[i] = 'Yellow';
             answerMarked[i] = true;
             continue;
         }
-        else {
+        else if ((found = answerArray.indexOf(specialChars[word[i]])) !== -1) {
+            result[i] = 'Yellow AltForm'
+            answerMarked[i] = false;
+            continue;
+        } else {
             result[i] ? {} : result[i] = 'No';
             continue;
         }
