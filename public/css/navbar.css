@@ -18,6 +18,10 @@ body {
     background-color: white;
 }
 
+#main {
+    max-width: 90vw;
+}
+
 #header {
     align-self: stretch;
     display: flex;

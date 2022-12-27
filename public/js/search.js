@@ -93,13 +93,39 @@ goButton.addEventListener('click', async () => {
     goButton.setAttribute('style', 'background-color: cornsilk;');
 
     // fetch request to /search here
-    const response = await fetch('/word/search', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(`query=${query}`)
-    }).then(res => res.json());
+    // const engResponse = await fetch('/word/search', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    //     body: new URLSearchParams(`query=${query}`)
+    // }).then(res => res.json());
 
-    // console.log(response);
+    // const kanaResponse = await fetch('/word/search', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    //     body: new URLSearchParams(`query=${wanakana.toHiragana(query)}`)
+    // }).then(res => res.json());
+
+    // Promise.all fails fast, which means that as soon as one of the promises supplied to it rejects, then the entire thing rejects.
+    // https://stackoverflow.com/questions/35612428/call-async-await-functions-in-parallel
+
+    let [engResponse, kanaResponse] = await Promise.all([
+        fetch('/word/search', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(`query=${query}`)
+        }).then(res => res.json()),
+        fetch('/word/search', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(`query=${wanakana.toHiragana(query)}`)
+        }).then(res => res.json())]);
+
+    // console.log(kanaResponse);
+    // console.log(engResponse);
+
+    let response = {};
+    response.results = kanaResponse.results.concat(engResponse.results);
+
     if (response.results && response.results.length) {
         localStorage.setItem('searchResult', JSON.stringify(response.results));
         draw(response.results);
