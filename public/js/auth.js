@@ -5,8 +5,8 @@ const switchFunc = function () {
     let formNode = document.querySelector("#credentials form button");
 
     if (formNode.innerText == "Log in") {
-        document.cookie = 'auth=register;sameSite=strict';
-        console.log(document.cookie);
+        document.cookie = 'auth=register;sameSite=strict;path=/';
+        // console.log(document.cookie);
 
         formNode.innerText = "Register";
         formNode.parentElement.setAttribute('action', '/register')
@@ -29,7 +29,7 @@ const switchFunc = function () {
     }
     else {
 
-        document.cookie = 'auth=login;sameSite=strict';
+        document.cookie = 'auth=login;sameSite=strict;path=/';
         // console.log(document.cookie);
 
         formNode.innerText = "Log in";
@@ -90,10 +90,5 @@ const formSubmit = async function (e) {
 
 loginForm.addEventListener('submit', formSubmit, true);
 
-function checkCookieHasASpecificValue() {
-    if (document.cookie.split(';').some((item) => item.includes('auth=register'))) {
-        switchFunc();
-    }
-}
-
-checkCookieHasASpecificValue();
+if (checkCookieHasASpecificValue('auth=register'))
+    switchFunc();

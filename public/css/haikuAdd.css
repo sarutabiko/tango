@@ -1,0 +1,46 @@
+#haikuBlock {
+    display: flex;
+    flex-direction: column;
+}
+
+#haikuMaker {
+    display: flex;
+    border-bottom: red double 0.4rem;
+    padding: 0.4rem;
+}
+
+#formatButtons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0.4rem;
+}
+
+#haikuDisplay {
+    display: flex;
+}
+
+#haikuDisplay #JPpoem {
+    padding: 0.4rem;
+    margin: 0.4rem;
+    background-color: cornsilk;
+    writing-mode: vertical-rl;
+    text-align: center;
+    font-size: xx-large;
+    align-self: center;
+    line-height: 2;
+}
+
+#haikuDisplay #ENpoem {
+    padding: 0.4rem;
+    margin: 0.4rem;
+    background-color: cornsilk;
+    text-align: center;
+    font-size: xx-large;
+    align-self: center;
+}
+
+textarea {
+    font-size: xx-large;
+    height: 100%;
+}

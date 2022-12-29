@@ -1,0 +1,30 @@
+<% layout('layouts/boilerplate') %>
+
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/flash.css">
+    <link rel="stylesheet" href="/css/haikuAdd.css">
+    </head>
+
+    <body>
+        <%- partial('partials/navbar') %>
+            <div id="haikuBlock">
+                <div id="haikuMaker">
+
+                    <div id="formatButtons">
+                        <button id="furigana" class="submitButton">Add Furigana</button>
+                        <button id="lineBreak" class="submitButton">Add Line Break</button>
+                        <button id="switchLang" class="submitButton">Write in EN</button>
+                        <button id="postHaiku" class="submitButton" style="border: 0.4rem double red;">Save</button>
+                    </div>
+                    <div>
+                        <textarea name="" id="" cols="15" rows="5"></textarea>
+                    </div>
+                </div>
+                <div id="haikuDisplay">
+                    <div id="JPpoem"></div>
+                    <div id="ENpoem"></div>
+                </div>
+            </div>
+
+
+            <script src="/js/haiku.js"></script>

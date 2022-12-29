@@ -21,6 +21,7 @@ const cookieParser = require('cookie-parser');
 const { User } = require('./models/user');
 const userRoutes = require('./routes/user');
 const wordRoutes = require('./routes/words');
+const haikuRoutes = require('./routes/haiku');
 
 
 // const ExpressError = require('./utils/ExpressError');
@@ -111,6 +112,7 @@ app.get('/wordle', async (req, res) => {
 
 app.use('/', userRoutes);
 app.use('/word', wordRoutes);
+app.use('/haiku', haikuRoutes);
 
 app.get('/search', (req, res) => {
     res.render('search', { title: "Search" });

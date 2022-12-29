@@ -26,13 +26,6 @@ const closeButton = function (target) {
     target.parentElement.remove();;
 }
 
-// For elements with "hide" classes, this will add eventlistener to hide it/parent div
-const flashX = document.querySelectorAll(".hide");
-
-for (let X of flashX) {
-    X.addEventListener('click', function () { this.parentElement.setAttribute('style', 'display: none;') })
-}
-
 // Opacity setter ie Blur effect helper for when you're waiting for async responses and such
 const blur = function (element, opacity = 0.8) {
     element.setAttribute('style', `opacity: ${opacity};`);
@@ -58,4 +51,11 @@ const popup = function (ID) {
     else {
         ele.setAttribute('style', 'display: none;');
     }
+}
+
+const checkCookieHasASpecificValue = function (checkCookie) {
+    if (document.cookie.split(';').some((item) => item.includes(checkCookie))) {
+        return true;
+    }
+    return false;
 }
