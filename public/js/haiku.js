@@ -33,17 +33,17 @@ function wrapRubyRT(html) {
 }
 
 const render = function () {
-    // const text = wrapRubyRT(strip_tags(textarea.value, 'br'));
-    // if (langFlag) {
-    // JPhtml = text;
-    haikuDisplayJP.innerHTML = JPhtml;
-    document.cookie = "jpHaiku=" + encodeURIComponent(JPhtml) + ';sameSite=strict';
-    // }
-    // else {
-    // ENhtml = text;
-    haikuDisplayEN.innerHTML = ENhtml;
-    document.cookie = 'enHaiku=' + encodeURIComponent(ENhtml) + ';sameSite=strict';
-    // }
+    const text = wrapRubyRT(strip_tags(textarea.value, 'br'));
+    if (langFlag) {
+        JPhtml = text;
+        haikuDisplayJP.innerHTML = JPhtml;
+        document.cookie = "jpHaiku=" + encodeURIComponent(JPhtml) + ';sameSite=strict';
+    }
+    else {
+        ENhtml = text;
+        haikuDisplayEN.innerHTML = ENhtml;
+        document.cookie = 'enHaiku=' + encodeURIComponent(ENhtml) + ';sameSite=strict';
+    }
 }
 
 textarea.addEventListener('input', render);
@@ -99,19 +99,22 @@ const retrieveHaikuFromCookie = function () {
             .split('; ')
             .find((row) => row.startsWith('enHaiku='))
             ?.split('=')[1])
+
+        haikuDisplayEN.innerHTML = ENhtml;
     }
     if (checkCookieHasASpecificValue('jpHaiku')) {
         JPhtml = decodeURIComponent(document.cookie
             .split('; ')
             .find((row) => row.startsWith('jpHaiku='))
             ?.split('=')[1])
+        haikuDisplayJP.innerHTML = JPhtml;
     }
 
     langFlag ? textarea.value = JPhtml : textarea.value = ENhtml;
 }
 
 retrieveHaikuFromCookie();
-render();
+// render();
 //なぜそなたは通り過ぎて
 // われらを置き去りにするのか。
 // このほのかな空虚で荒涼たる
